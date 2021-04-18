@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import './cards.dart';
-import './matches.dart';
-import './profiles.dart';
+import 'view/cards.dart';
+import 'view/matches.dart';
+import 'view/profiles.dart';
 
 void main() {
   runApp(MyApp());
