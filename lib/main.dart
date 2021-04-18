@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/RouteHandler/Routing_Handler.dart';
+import 'package:honeyaa_clientside/view/SplashScreen.dart';
 import './view/MainScreen.dart';
 
 void main() {
@@ -15,7 +17,8 @@ class MyApp extends StatelessWidget {
         primaryColorBrightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      onGenerateRoute: RouteHandler.generateRoute,
     );
   }
 }
