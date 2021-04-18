@@ -1,3 +1,5 @@
+import 'package:honeyaa_clientside/view/MainScreen.dart';
+
 import 'package:flutter/material.dart';
 
 class RouteHandler {
@@ -5,7 +7,7 @@ class RouteHandler {
     final args = settings.arguments;
     switch (settings.name) {
       case '/':
-        //return MaterialPageRoute(builder: (_) => LoginPage());
+        return MaterialPageRoute(builder: (_) => MyHomePage());
 
       default:
         return _errorRoute();
