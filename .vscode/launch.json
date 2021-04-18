@@ -8,7 +8,7 @@
             "name": "honeyaa_clientside",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart"
+            "program": "lib/view/main.dart"
         }
     ]
 }
