@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             size: 40.0,
           ),
           onPressed: () {
-            // TODO
+            Navigator.pushNamed(context, '/chatscreen');
           },
         ),
       ],

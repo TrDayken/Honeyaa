@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:honeyaa_clientside/view/SplashScreen.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
+import 'package:honeyaa_clientside/view/ChatScreen.dart';
 
 class RouteHandler {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -9,9 +10,10 @@ class RouteHandler {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => Splash());
-      case 'mainscreen':
+      case '/mainscreen':
         return MaterialPageRoute(builder: (_) => MyHomePage());
-
+      case '/chatscreen':
+        return MaterialPageRoute(builder: (_) => ChatScreen());
       default:
         return _errorRoute();
     }
