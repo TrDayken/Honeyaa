@@ -12,7 +12,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     //  set time to load the new page
     Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushNamed(context, '/mainscreen');
+      Navigator.pushNamed(context, '/mainhub');
     });
     super.initState();
   }
