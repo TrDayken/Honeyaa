@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/view/MainScreen.dart';
+
 import '../view/ChatHistoryView.dart';
+import '../view/ProfileView.dart';
 
 class MainHub extends StatefulWidget 
 {
@@ -39,9 +42,9 @@ class _MainHubState extends State<MainHub>
       ),
       body: TabBarView(
         children: [
-        Icon(Icons.directions_transit),
+        MyHomePage(),
         ChatHistoryView(),
-        Icon(Icons.directions_bike),
+        ProfileView(),
       ],
       ),
     )

@@ -16,9 +16,19 @@ class _ChatHistoryState extends State<ChatHistoryView>
   {
     return ListView(
       children: <Widget> [
-        Text('Anonymous Chat'),
+        //anonymous heading
+        Padding(
+          padding: EdgeInsets.all(12.0) , 
+          child:  Text('Anonymous Chat')
+          ),
+          //this will be a list of future person 
         ChatPersonTile(),
-        Text('Message'),
+        // Mesage heading
+        Padding( 
+          padding: EdgeInsets.all(12.0),
+          child:  Text('Message')
+          ),
+          // this will be a list of future person
         ChatPersonTile(),
         ChatPersonTile(),
       ],

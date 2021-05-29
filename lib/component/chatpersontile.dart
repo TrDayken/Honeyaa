@@ -13,7 +13,7 @@ class _ChatPersonTile extends State<ChatPersonTile>
   Widget build(BuildContext context) 
   {
     final double avatarradious = 40; 
-
+    
     final birdavatarpath = 'assets/Bird_1.jpg';
     final birdiename ='Horny Bird near your area!!!';
 
@@ -21,9 +21,9 @@ class _ChatPersonTile extends State<ChatPersonTile>
       leading: CircleAvatar(
         radius: avatarradious,
         //backgroundImage: Image.asset(birdavatarpath, BoxFit.cover),
-        child: ClipRRect(
-          child: Image.asset(birdavatarpath, fit: BoxFit.cover) ,
-          borderRadius: BorderRadius.circular(100.0),
+        child: ClipOval(
+          child: Image.asset(birdavatarpath, fit: BoxFit.fill) ,
+          //borderRadius: BorderRadius.circular(100.0),
         )
       ),
       title: Text(birdiename),

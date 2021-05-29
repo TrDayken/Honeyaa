@@ -51,6 +51,16 @@ flutter:
   assets:
     - assets/lottie/
     - assets/
+
+  fonts:
+    - family: GothamRounded
+      fonts:
+        - asset: assets\font\GothamRounded-Book.otf
+        - asset: assets\font\GothamRounded-BookItalic.otf
+          style: italic
+        - asset: assets\font\GothamRounded-Bold.otf
+          weight: 700
+        #style: italic
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
