@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../component/personavatar.dart';
-import '../component/roundedbutton.dart'; 
+import '../component/RoundIconButton.dart'; 
 
 class ProfileView extends StatefulWidget{
   @override

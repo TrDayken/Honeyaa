@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-import '../component/roundedbutton.dart';
+import 'RoundIconButton.dart';
 
 class PersonAvatar extends StatefulWidget
 {
@@ -13,13 +14,25 @@ class _PersonAvatar extends State<PersonAvatar>
 
   Widget buttonCarousel ()
   {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        RoundedButton(),
-        RoundedButton(),
-        RoundedButton(),
-      ],
+    return Padding(
+      padding: EdgeInsets.all(30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          new RoundIconButton.large(
+            icon: Icons.pending_outlined,
+            onPressed: () {},
+          ),
+          // new RoundIconButton.large(
+          //   icon: Icons.wifi_off,
+          //   onPressed: () {}
+          // ),
+          new RoundIconButton.large(
+            icon: Icons.person_sharp,
+            onPressed: () {}
+          ),
+        ],
+      )
     );
   }
 
