@@ -5,8 +5,9 @@ import 'Exception.dart';
 import 'dart:io';
 
 class ApiBaseHelper {
-  
-final String _baseUrl = "some cool base apis";
+
+// api base url  
+final String _baseUrl = "http://127.0.0.1:8000/api/";
 
   Future<dynamic> get(String url) async {
       var responseJson;
