@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:honeyaa_clientside/view/LoginScreen.dart';
 
 Future<User> createAccount(String email, String password) async {
@@ -54,4 +55,16 @@ Future logOut(BuildContext context) async {
   } catch (e) {
     print("error");
   }
+}
+
+Future<UserCredential> signinWithGoogle() async {
+  final GoogleSignInAccount googleUser =
+      await GoogleSignIn(scopes: <String>["email"]).signIn();
+
+  final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+  final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+
+  return await FirebaseAuth.instance.signInWithCredential(credential);
 }

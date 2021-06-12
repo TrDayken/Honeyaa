@@ -134,6 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             logIn(nameController.text, passwordController.text)
                                 .then((user) {
+                              print(user.uid);
                               if (user != null) {
                                 setState(() {
                                   isLoading = false;
@@ -183,7 +184,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         minWidth: double.maxFinite,
                         height: 50,
                         onPressed: () {
-                          // _signInWithGoogle();
+                          signinWithGoogle().then((UserCredential value) {
+                            final displayName = value.user.displayName;
+                            final test = value.user.uid;
+                            print(test);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyHomePage()),
+                                (route) => false);
+                          });
                         },
                         color: Colors.blue,
                         child: Row(
