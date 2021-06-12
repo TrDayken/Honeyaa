@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>997853511574-0dea677mrb5ifs6egcfje9citr6geqep.apps.googleusercontent.com</string>
+	<string>997853511574-mqpvnpe627d8dd9aapohuqbtren08erq.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.997853511574-0dea677mrb5ifs6egcfje9citr6geqep</string>
+	<string>com.googleusercontent.apps.997853511574-mqpvnpe627d8dd9aapohuqbtren08erq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>997853511574-lpnv8pta2ff24v81c22ok6v0u3busso5.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyD-gWOjaAfcdBFrrRmKE3_dyAYQjToCmdk</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.honeyaaa</string>
+	<string>com.duydn.honeyaaa</string>
 	<key>PROJECT_ID</key>
 	<string>honeyaa-4151f</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:997853511574:ios:57ec0f8ca3c3009e88e7b7</string>
+	<string>1:997853511574:ios:e303b8cd49be504f88e7b7</string>
 </dict>
 </plist>
