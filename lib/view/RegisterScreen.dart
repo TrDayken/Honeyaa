@@ -1,20 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:honeyaa_clientside/auth/Methods.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
-import 'package:honeyaa_clientside/view/RegisterScreen.dart';
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 bool _obscureText = true;
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final Color primaryColor = Color(0xff18203d);
   final Color secondaryColor = Color(0xff232c51);
 
@@ -23,10 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
-
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-
   void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
@@ -58,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Sign in to Honeyaa and continue',
+                        'Register to Honeyaa and continue',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.openSans(
                             color: Colors.white, fontSize: 28),
@@ -105,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: TextFormField(
                           controller: passwordController,
                           obscuringCharacter: '*',
-                          //obscureText: _obscureText,
+                          obscureText: _obscureText,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               contentPadding:
@@ -132,7 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               isLoading = true;
                             });
 
-                            logIn(nameController.text, passwordController.text)
+                            createAccount(nameController.text,
+                                    passwordController.text)
                                 .then((user) {
                               if (user != null) {
                                 setState(() {
@@ -142,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (_) => MyHomePage()));
-                                print("Login Sucessfull");
+                                print("Account Created Sucessfull");
                               } else {
                                 print("Login Failed");
                                 setState(() {
@@ -155,53 +149,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                         },
                         color: logoGreen,
-                        child: Text('Login',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 16)),
-                        textColor: Colors.white,
-                      ),
-                      SizedBox(height: 20),
-                      MaterialButton(
-                        elevation: 0,
-                        minWidth: double.maxFinite,
-                        height: 50,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterScreen()));
-                        },
-                        color: Colors.blue,
                         child: Text('Register',
                             style:
                                 TextStyle(color: Colors.white, fontSize: 16)),
                         textColor: Colors.white,
                       ),
-                      SizedBox(height: 20),
-                      MaterialButton(
-                        elevation: 0,
-                        minWidth: double.maxFinite,
-                        height: 50,
-                        onPressed: () {
-                          // _signInWithGoogle();
-                        },
-                        color: Colors.blue,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(FontAwesomeIcons.google),
-                            SizedBox(width: 10),
-                            Text('Sign-in using Google',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 16)),
-                          ],
-                        ),
-                        textColor: Colors.white,
-                      ),
                       SizedBox(height: 100),
                       Align(
                         alignment: Alignment.bottomCenter,
-                        //child: _buildFooterLogo(),
                       )
                     ],
                   ),

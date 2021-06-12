@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/auth/Methods.dart';
 import '../component/cards.dart';
 import '../component/matches.dart';
 import '../component/profiles.dart';
@@ -31,9 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.grey,
           size: 40.0,
         ),
-        onPressed: () {
-          // TODO
-        },
+        onPressed: () => logOut(context),
       ),
       title: new FlutterLogo(
         size: 30.0,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/auth/Authentication.dart';
 
 import 'package:honeyaa_clientside/view/SplashScreen.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
@@ -17,9 +18,11 @@ class RouteHandler {
       case '/chatscreen':
         return MaterialPageRoute(builder: (_) => ChatScreen());
       case '/mainhub':
-        return MaterialPageRoute(builder: (_) => MainHub()) ; 
+        return MaterialPageRoute(builder: (_) => MainHub());
       case '/login':
         return MaterialPageRoute(builder: (_) => LoginScreen());
+      case '/authentication':
+        return MaterialPageRoute(builder: (_) => Authentication());
       default:
         return _errorRoute();
     }
