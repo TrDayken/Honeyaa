@@ -32,6 +32,11 @@ dependencies:
   stacked: ^2.0.4
   shared_preferences: ^2.0.5
   firebase_auth: "^0.20.1"
+  firebase_core : ^0.7.0
+  google_sign_in: 
+  font_awesome_flutter: 
+  google_fonts:
+  provider:
 
 dev_dependencies:
   flutter_test:
