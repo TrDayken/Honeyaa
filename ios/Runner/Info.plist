@@ -25,10 +25,9 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>997853511574-mqpvnpe627d8dd9aapohuqbtren08erq.apps.googleusercontent.com</string>
+				<string>com.googleusercontent.apps.997853511574-mqpvnpe627d8dd9aapohuqbtren08erq</string>
 			</array>
 		</dict>
-		<dict/>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
