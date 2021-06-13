@@ -40,13 +40,15 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+          automaticallyImplyLeading: false
+          ,
         ),
         backgroundColor: primaryColor,
         body: isLoading
             ? Center(
                 child: Container(
                 height: size.height / 15,
-                width: size.width / 7,
+                width: size.height /15,
                 child: CircularProgressIndicator(),
               ))
             : Container(
@@ -139,10 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() {
                                   isLoading = false;
                                 });
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => MyHomePage()));
+                                Navigator.pushNamed(context, "/mainhub");
                                 print("Login Sucessfull");
                               } else {
                                 print("Login Failed");
@@ -167,10 +166,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         minWidth: double.maxFinite,
                         height: 50,
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterScreen()));
+                          Navigator.pushNamed(context, "/register");
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => RegisterScreen()));
                         },
                         color: Colors.blue,
                         child: Text('Register',

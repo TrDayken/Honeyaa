@@ -6,6 +6,7 @@ import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/ChatScreen.dart';
 import 'package:honeyaa_clientside/view/MainHub.dart';
 import 'package:honeyaa_clientside/view/LoginScreen.dart';
+import 'package:honeyaa_clientside/view/RegisterScreen.dart';
 
 class RouteHandler {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -21,6 +22,8 @@ class RouteHandler {
         return MaterialPageRoute(builder: (_) => MainHub());
       case '/login':
         return MaterialPageRoute(builder: (_) => LoginScreen());
+      case '/register':
+        return MaterialPageRoute(builder: (_) => RegisterScreen());
       case '/authentication':
         return MaterialPageRoute(builder: (_) => Authentication());
       default:
