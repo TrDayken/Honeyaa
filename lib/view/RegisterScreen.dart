@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:honeyaa_clientside/auth/Methods.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
+import 'package:honeyaa_clientside/view/register_sub_screen/RegisterSubScreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -135,7 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) => MyHomePage()));
+                                        builder: (_) => RegisterSubScreen()));
                                 print("Account Created Sucessfull");
                               } else {
                                 print("Login Failed");

@@ -37,6 +37,9 @@ dependencies:
   font_awesome_flutter: 
   google_fonts:
   provider:
+  percent_indicator: "^2.1.7+2"
+  numberpicker: ^1.3.0
+  image_picker: ^0.6.7+17
 
 dev_dependencies:
   flutter_test:
