@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:honeyaa_clientside/auth/Methods.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/RegisterScreen.dart';
+import 'package:honeyaa_clientside/view/register_sub_screen/RegisterSubScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -170,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RegisterScreen()));
+                                  builder: (context) => RegisterSubScreen()));
                         },
                         color: Colors.blue,
                         child: Text('Register',
