@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/view/ProfileScreen.dart';
 
 import '../component//RoundIconButton.dart';
 import 'package:honeyaa_clientside/auth/Methods.dart';
@@ -34,7 +35,10 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.grey,
           size: 40.0,
         ),
-        onPressed: () => logOut(context),
+        onPressed: () => {
+          // logOut(context)
+          Navigator.pushNamed(context, '/profile')
+        },
       ),
       title: new FlutterLogo(
         size: 30.0,
@@ -103,9 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: _buildAppBar(),
+      appBar: _buildAppBar(),
       // body: new CardStack(
-      //   matchEngine: matchEngine,
+      //   //matchEngine: matchEngine,
       // ),
       bottomNavigationBar: _buildBottomBar(),
     );
