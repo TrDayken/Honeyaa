@@ -36,7 +36,9 @@ dependencies:
   google_sign_in: 
   font_awesome_flutter: 
   google_fonts:
-  provider:
+  equatable: ^2.0.0
+  rxdart: ^0.22.0
+  bloc:
   percent_indicator: "^2.1.7+2"
   numberpicker: ^1.3.0
   image_picker: ^0.6.7+17

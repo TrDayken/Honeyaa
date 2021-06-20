@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/models/User.dart';
 
 import 'RoundIconButton.dart';
+
+import 'package:honeyaa_clientside/bloc/userBloc.dart';
 
 class PersonAvatar extends StatefulWidget
 {
@@ -36,9 +39,27 @@ class _PersonAvatar extends State<PersonAvatar>
     );
   }
 
+  @override
+  Widget build (BuildContext context) 
+  {
+    userBloc.fetchUser();
 
-  @override 
-  Widget build(BuildContext context) 
+    return StreamBuilder(
+      stream: userBloc.user,
+      builder: (context, AsyncSnapshot<User> snapshot) {
+        if (snapshot.hasData) {
+          return buildbutton(snapshot.data);
+        }
+        else if (snapshot.hasError) {
+          return Text (snapshot.error.toString()); 
+        }
+        return Center (child: CircularProgressIndicator());
+      },
+    );
+  }
+
+
+  Widget buildbutton(User data) 
   {
         final String name = "Buckdie"; 
         final String age = "21";
