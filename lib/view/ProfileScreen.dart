@@ -10,8 +10,14 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: getBody(),
+    return Stack(
+      children: [
+        getBody(),
+        Container(
+          height: 70,
+          color: Colors.white,
+        ),
+      ],
     );
   }
 
@@ -19,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var size = MediaQuery.of(context).size;
     return Container(
       width: size.width * 2,
-      height: size.height * 0.60,
+      height: size.height * 0.50,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(80),
@@ -42,8 +48,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image: AssetImage(
-                          "/Users/duydn/Documents/GitHub/Honeyaa/assets/Bird_1.jpg"),
+                      image: NetworkImage(
+                          "https://scontent-hkg4-1.xx.fbcdn.net/v/t1.6435-9/157314952_292205995579537_3091515640804872056_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=0debeb&_nc_ohc=66YXWn73VUEAX-CrZuR&_nc_ht=scontent-hkg4-1.xx&oh=813c2fee49ac47db469c6f3ea513065e&oe=60D545F3"),
                       fit: BoxFit.cover)),
             ),
             SizedBox(
@@ -62,24 +68,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Column(
                   children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 10,
-                              blurRadius: 15,
-                              // changes position of shadow
-                            ),
-                          ]),
-                      child: Icon(
-                        Icons.settings,
-                        size: 35,
-                        color: Colors.grey.withOpacity(0.5),
+                    GestureDetector(
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 10,
+                                blurRadius: 15,
+                                // changes position of shadow
+                              ),
+                            ]),
+                        child: Icon(
+                          Icons.settings,
+                          size: 35,
+                          color: Colors.grey.withOpacity(0.5),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -98,45 +106,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
-                      Container(
-                        width: 85,
-                        height: 85,
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFFfc3973),
-                                      Color(0xFFfd5f60)
-                                    ],
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.1),
-                                      spreadRadius: 10,
-                                      blurRadius: 15,
-                                      // changes position of shadow
-                                    ),
-                                  ]),
-                              child: Icon(
-                                Icons.camera_alt,
-                                size: 45,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 8,
-                              right: 0,
-                              child: Container(
-                                width: 25,
-                                height: 25,
+                      GestureDetector(
+                        child: Container(
+                          width: 85,
+                          height: 85,
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: 80,
+                                height: 80,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Colors.white,
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0xFFfc3973),
+                                        Color(0xFFfd5f60)
+                                      ],
+                                    ),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.grey.withOpacity(0.1),
@@ -145,13 +131,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         // changes position of shadow
                                       ),
                                     ]),
-                                child: Center(
-                                  child:
-                                      Icon(Icons.add, color: Color(0xFFFD5C61)),
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  size: 45,
+                                  color: Colors.white,
                                 ),
                               ),
-                            )
-                          ],
+                              Positioned(
+                                bottom: 8,
+                                right: 0,
+                                child: Container(
+                                  width: 25,
+                                  height: 25,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.1),
+                                          spreadRadius: 10,
+                                          blurRadius: 15,
+                                          // changes position of shadow
+                                        ),
+                                      ]),
+                                  child: Center(
+                                    child: Icon(Icons.add,
+                                        color: Color(0xFFFD5C61)),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(

@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      // appBar: _buildAppBar(),
       // body: new CardStack(
       //   //matchEngine: matchEngine,
       // ),
