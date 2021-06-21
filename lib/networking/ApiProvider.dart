@@ -11,7 +11,7 @@ class ApiProvider
   final _baseUrl = 'https://1fa6cbbfb672.ngrok.io/api'; 
 
 
-  Future<User> fetchUser(int id) async {
+  Future<User> getUser(int id) async {
     final response = await client.get(_baseUrl + '/person/' + id.toString() );
 
     print (response.body.toString()); 
