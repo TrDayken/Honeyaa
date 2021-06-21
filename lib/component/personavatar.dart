@@ -42,7 +42,7 @@ class _PersonAvatar extends State<PersonAvatar>
   @override
   Widget build (BuildContext context) 
   {
-    userBloc.fetchUser();
+    userBloc.getUser();
 
     return StreamBuilder(
       stream: userBloc.user,
@@ -65,6 +65,7 @@ class _PersonAvatar extends State<PersonAvatar>
         final String age = "21";
         final birdavatarpath = 'assets/Bird_1.jpg';
 
+        print(data); 
     return  Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

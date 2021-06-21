@@ -4,5 +4,5 @@ import 'package:honeyaa_clientside/networking/ApiProvider.dart';
 class Repository {
   ApiProvider apiProvider = ApiProvider();
 
-  Future<User> fetchUser(int id) => apiProvider.fetchUser(id);
+  Future<User> getUser(int id) => apiProvider.getUser(id);
 }
