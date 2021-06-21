@@ -4,8 +4,6 @@ import 'package:honeyaa_clientside/RouteHandler/Routing_Handler.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'package:flutter_infinite_list/simple_bloc_observer.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -24,7 +22,7 @@ class MyApp extends StatelessWidget {
         primaryColorBrightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/mainhub',
+      initialRoute: '/register',
       onGenerateRoute: RouteHandler.generateRoute,
     );
   }

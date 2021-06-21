@@ -24,8 +24,8 @@ class _RegisterSubScreenState extends State<RegisterSubScreen> {
   final int _endScreenIndex = 3;
   int _currentScreenIndex = 0;
   final UserRegistration _userRegistration = UserRegistration();
-  final Color primaryColor = Color(0xff18203d);
-  final Color secondaryColor = Color(0xff232c51);
+  final Color primaryColor = Colors.white;
+  final Color secondaryColor = Color(0xffEB9605);
 
   void goBackPressed() {
     if (_currentScreenIndex == 0) {
@@ -113,12 +113,13 @@ class _RegisterSubScreenState extends State<RegisterSubScreen> {
         resizeToAvoidBottomInset: false,
         //key: _scaffoldKey,
         appBar: AppBar(
+          foregroundColor: Colors.white,
           title: Text(
             'Register',
             style: TextStyle(color: Colors.white),
             textAlign: TextAlign.left,
           ),
-          backgroundColor: Colors.transparent,
+          backgroundColor: secondaryColor,
         ),
         body: CustomModalProgressHUD(
           inAsyncCall: isLoading,
@@ -130,7 +131,7 @@ class _RegisterSubScreenState extends State<RegisterSubScreen> {
                   child: LinearPercentIndicator(
                       lineHeight: 5,
                       percent: (_currentScreenIndex / _endScreenIndex),
-                      progressColor: Color(0xFFF4C470),
+                      progressColor: Colors.blue,
                       padding: EdgeInsets.zero),
                 ),
                 Align(
@@ -166,26 +167,30 @@ class _RegisterSubScreenState extends State<RegisterSubScreen> {
                   padding: kDefaultPadding,
                   child: _currentScreenIndex == (_endScreenIndex)
                       ? MaterialButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25)),
                           minWidth: size.width,
                           height: size.height / 15,
                           child: Text('Register',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 16)),
                           textColor: Colors.white,
-                          color: Colors.blue,
+                          color: secondaryColor,
                           onPressed: isLoading == false
                               ? () => {
                                     // registerUser()
                                   }
                               : null)
                       : MaterialButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25)),
                           minWidth: size.width,
                           height: size.height / 15,
                           child: Text('Continue',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 16)),
                           textColor: Colors.white,
-                          color: Colors.blue,
+                          color: secondaryColor,
                           onPressed: () => {
                             if (canContinueToNextSubScreen())
                               setState(() {

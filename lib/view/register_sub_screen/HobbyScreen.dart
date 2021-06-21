@@ -19,26 +19,30 @@ class _HobbyScreenState extends State<HobbyScreen> {
       children: [
         Text(
           "Select your",
-          style: TextStyle(color: Colors.white, fontSize: 50),
+          style: TextStyle(
+              color: Colors.black, fontSize: 50, fontWeight: FontWeight.w500),
         ),
         Text(
           "hobbies..!",
-          style: TextStyle(color: Colors.white, fontSize: 50),
+          style: TextStyle(
+              color: Colors.black, fontSize: 50, fontWeight: FontWeight.w500),
         ),
         SizedBox(
           height: 20,
         ),
         Container(
-          decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Colors.black)),
           child: CheckboxListTile(
-            selectedTileColor: Colors.white,
+            selectedTileColor: Colors.black,
             title: const Text(
               'Sleep',
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              style: TextStyle(color: Colors.black, fontSize: 25),
             ),
             secondary: const Icon(
               Icons.bed,
-              color: Colors.white,
+              color: Colors.black,
               size: 25,
             ),
             value: _isChecked,
@@ -53,16 +57,18 @@ class _HobbyScreenState extends State<HobbyScreen> {
           height: 20,
         ),
         Container(
-          decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Colors.black)),
           child: CheckboxListTile(
-            selectedTileColor: Colors.white,
+            selectedTileColor: Colors.black,
             title: const Text(
               'Music',
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              style: TextStyle(color: Colors.black, fontSize: 25),
             ),
             secondary: const Icon(
               Icons.music_note,
-              color: Colors.white,
+              color: Colors.black,
               size: 25,
             ),
             value: _isChecked,
@@ -77,16 +83,18 @@ class _HobbyScreenState extends State<HobbyScreen> {
           height: 20,
         ),
         Container(
-          decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Colors.black)),
           child: CheckboxListTile(
-            selectedTileColor: Colors.white,
+            selectedTileColor: Colors.black,
             title: const Text(
               'Sport',
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              style: TextStyle(color: Colors.black, fontSize: 25),
             ),
             secondary: const Icon(
               Icons.sports,
-              color: Colors.white,
+              color: Colors.black,
               size: 25,
             ),
             value: _isChecked,
@@ -101,16 +109,18 @@ class _HobbyScreenState extends State<HobbyScreen> {
           height: 20,
         ),
         Container(
-          decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Colors.black)),
           child: CheckboxListTile(
-            selectedTileColor: Colors.white,
+            selectedTileColor: Colors.black,
             title: const Text(
               'Travel',
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              style: TextStyle(color: Colors.black, fontSize: 25),
             ),
             secondary: const Icon(
               Icons.travel_explore,
-              color: Colors.white,
+              color: Colors.black,
               size: 25,
             ),
             value: _isChecked,

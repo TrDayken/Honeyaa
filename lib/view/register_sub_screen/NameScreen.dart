@@ -17,11 +17,17 @@ class NameScreen extends StatelessWidget {
             children: [
               Text(
                 'My first',
-                style: TextStyle(color: Colors.white, fontSize: 50),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 50,
+                    fontWeight: FontWeight.w500),
               ),
               Text(
                 'name is',
-                style: TextStyle(color: Colors.white, fontSize: 50),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 50,
+                    fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -30,11 +36,12 @@ class NameScreen extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
               color: Colors.transparent,
-              border: Border.all(color: Colors.white)),
+              border: Border.all(color: secondaryColor)),
           child: TextFormField(
             onChanged: onChanged,
-            style: TextStyle(color: Colors.white, fontSize: 30),
+            style: TextStyle(color: Colors.black, fontSize: 30),
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
                 labelStyle: TextStyle(color: Colors.black),

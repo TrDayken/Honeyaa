@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honeyaa_clientside/component/ImagePortrait.dart';
+import 'package:honeyaa_clientside/component/RoundIconButton.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddPhotoScreen extends StatefulWidget {
@@ -14,6 +15,8 @@ class AddPhotoScreen extends StatefulWidget {
 class _AddPhotoScreenState extends State<AddPhotoScreen> {
   final picker = ImagePicker();
   String _imagePath;
+  final Color primaryColor = Colors.white;
+  final Color secondaryColor = Color(0xffEB9605);
 
   Future pickImageFromGallery() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -35,7 +38,8 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
         children: [
           Text(
             'Add photo',
-            style: TextStyle(color: Colors.white, fontSize: 50),
+            style: TextStyle(
+                color: Colors.black, fontSize: 50, fontWeight: FontWeight.w500),
           ),
           Expanded(
             child: Column(
@@ -56,9 +60,10 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                         child: Align(
                           alignment: Alignment.center,
                           child: _imagePath == null
-                              ? MaterialButton(
+                              ? RoundIconButton(
                                   onPressed: pickImageFromGallery,
-                                  color: Colors.lightGreen,
+                                  icon: Icons.add,
+                                  size: 50,
                                 )
                               : null,
                         ),

@@ -14,6 +14,8 @@ class AgeScreen extends StatefulWidget {
 
 class _AgeScreenState extends State<AgeScreen> {
   int age = 0;
+  final Color primaryColor = Colors.white;
+  final Color secondaryColor = Color(0xffEB9605);
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +28,17 @@ class _AgeScreenState extends State<AgeScreen> {
             children: [
               Text(
                 'My',
-                style: TextStyle(color: Colors.white, fontSize: 50),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 50,
+                    fontWeight: FontWeight.w500),
               ),
               Text(
                 'age is',
-                style: TextStyle(color: Colors.white, fontSize: 50),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 50,
+                    fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -40,11 +48,11 @@ class _AgeScreenState extends State<AgeScreen> {
             child: Container(
               child: NumberPicker.integer(
                   listViewWidth: double.infinity,
-                  textStyle: TextStyle(color: Colors.white, fontSize: 20),
+                  textStyle: TextStyle(color: Colors.black, fontSize: 20),
                   selectedTextStyle:
-                      TextStyle(color: Colors.white, fontSize: 40),
+                      TextStyle(color: Colors.black, fontSize: 40),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 2),
+                    border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   initialValue: age,

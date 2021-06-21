@@ -7,6 +7,8 @@ class ImagePortrait extends StatelessWidget {
   final double height;
   final String imagePath;
   final ImageType imageType;
+  final Color primaryColor = Colors.white;
+  final Color secondaryColor = Color(0xffEB9605);
 
   ImagePortrait(
       {@required this.imageType, this.imagePath, this.height = 250.0});
@@ -14,10 +16,10 @@ class ImagePortrait extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: this.height * 0.65,
-      height: MediaQuery.of(context).size.height / 3,
+      width: this.height * 0.8,
+      height: MediaQuery.of(context).size.height / 2.5,
       decoration: BoxDecoration(
-          border: Border.all(width: 2, color: Colors.white),
+          border: Border.all(width: 4, color: Colors.grey),
           borderRadius: BorderRadius.all(Radius.circular(25.0))),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(22.0),
