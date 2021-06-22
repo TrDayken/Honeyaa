@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honeyaa_clientside/auth/Authentication.dart';
+import 'package:honeyaa_clientside/view/ProfileEditScreen.dart';
 import 'package:honeyaa_clientside/view/ProfileScreen.dart';
 
 import 'package:honeyaa_clientside/view/SplashScreen.dart';
@@ -32,6 +33,8 @@ class RouteHandler {
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case '/registersub':
         return MaterialPageRoute(builder: (_) => RegisterSubScreen());
+      case '/profileEdit':
+        return MaterialPageRoute(builder: (_) => ProfileEditScreen()); 
       default:
         return _errorRoute();
     }
