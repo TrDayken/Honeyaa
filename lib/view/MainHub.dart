@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/view/LikeScreen.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/ProfileScreen.dart';
 
@@ -18,7 +19,7 @@ class _MainHubState extends State<MainHub> {
 
     return DefaultTabController(
         initialIndex: 0,
-        length: 3,
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
               automaticallyImplyLeading: false,
@@ -29,12 +30,14 @@ class _MainHubState extends State<MainHub> {
                   indicatorColor: Color.fromARGB(255, 0, 0, 0),
                   tabs: <Widget>[
                     Tab(icon: Icon(Icons.switch_account)),
+                    Tab(icon: Icon(Icons.star)),
                     Tab(icon: Icon(Icons.chat_bubble_rounded)),
                     Tab(icon: Icon(Icons.person)),
                   ])),
           body: TabBarView(
             children: [
               MyHomePage(),
+              LikeScreen(),
               ChatHistoryView(),
               ProfileScreen(),
             ],
