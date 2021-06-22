@@ -69,6 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Column(
                   children: [
                     GestureDetector(
+                      onTap: () => {Navigator.pushNamed(context,'/profileEdit')},
                       child: Container(
                         width: 60,
                         height: 60,

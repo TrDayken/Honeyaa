@@ -15,6 +15,7 @@ class ProfileEditScreen extends StatefulWidget {
 
   class _ProfileEditScreenState extends State<ProfileEditScreen>{
     TextEditingController name = TextEditingController();
+    TextEditingController age = TextEditingController();
 
     
     Widget _buildAppBar()
@@ -39,8 +40,28 @@ class ProfileEditScreen extends StatefulWidget {
 
     Widget _bodybuilder(User data)
     {
-      data.name = 'ngocduy'; 
-      return Column(children: [Text(data.name), Text(data.uid)]);
+      return ListView(
+        children:<Widget> [
+          Padding(
+            padding: EdgeInsets.all(12.0) , 
+            child:  Text('Your name:')
+          ),
+          ListTile(
+            title: TextField(
+              controller: name..text = data.name
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Text('Age:'),
+          ),
+          ListTile(
+            title: TextField(
+              controller: age..text = data.url,
+            ),
+          )
+        ],
+      );
     }
 
     @override 
