@@ -14,7 +14,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         getBody(),
         Container(
-          height: 70,
+          height: 45,
           color: Colors.white,
         ),
       ],
@@ -25,10 +25,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var size = MediaQuery.of(context).size;
     return Container(
       width: size.width * 2,
-      height: size.height * 0.50,
+      height: size.height * 0.55,
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(80),
+          borderRadius: BorderRadius.circular(70),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.1),
@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ]),
       child: Padding(
-        padding: const EdgeInsets.only(left: 30, right: 30, bottom: 40),
+        padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -69,7 +69,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () => {Navigator.pushNamed(context,'/profileEdit')},
+                      onTap: () =>
+                          {Navigator.pushNamed(context, '/profileEdit')},
                       child: Container(
                         width: 60,
                         height: 60,
