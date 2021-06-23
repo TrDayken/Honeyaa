@@ -122,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Padding(
-                              padding: const EdgeInsets.all(15),
+                              padding: const EdgeInsets.all(5),
                               child: Row(
                                 children: [
                                   Container(
@@ -215,37 +215,37 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   ),
                                                 ));
                                             //}
-                                            return Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30),
-                                                      color: Colors.white
-                                                          .withOpacity(0.4),
-                                                      border: Border.all(
-                                                          color: Colors.white,
-                                                          width: 2)),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 10,
-                                                            right: 10,
-                                                            bottom: 3,
-                                                            top: 3),
-                                                    child: Text(
-                                                      //itemTemp
-                                                      //[index]
-                                                      //['favorites']
-                                                      //[indexFavorites],
-                                                      "Sport",
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                ));
+                                            // return Padding(
+                                            //     padding: const EdgeInsets.only(
+                                            //         right: 8),
+                                            //     child: Container(
+                                            //       decoration: BoxDecoration(
+                                            //           borderRadius:
+                                            //               BorderRadius.circular(
+                                            //                   30),
+                                            //           color: Colors.white
+                                            //               .withOpacity(0.4),
+                                            //           border: Border.all(
+                                            //               color: Colors.white,
+                                            //               width: 2)),
+                                            //       child: Padding(
+                                            //         padding:
+                                            //             const EdgeInsets.only(
+                                            //                 left: 10,
+                                            //                 right: 10,
+                                            //                 bottom: 3,
+                                            //                 top: 3),
+                                            //         child: Text(
+                                            //           //itemTemp
+                                            //           //[index]
+                                            //           //['favorites']
+                                            //           //[indexFavorites],
+                                            //           "Sport",
+                                            //           style: TextStyle(
+                                            //               color: Colors.white),
+                                            //         ),
+                                            //       ),
+                                            //     ));
                                           },
                                         ))
                                       ],
