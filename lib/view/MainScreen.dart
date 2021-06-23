@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:honeyaa_clientside/view/ProfileScreen.dart';
 
 import '../component//RoundIconButton.dart';
@@ -17,6 +18,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List itemTemp = [];
   int itemLength = 0;
+  CardController cardController = new CardController();
+  Position _currentPosition;
 
   @override
   void initState() {
@@ -27,46 +30,61 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  _getCurrentLocation() {
+    Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.best,
+            forceAndroidLocationManager: true)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
   Widget _buildBottomBar() {
     return BottomAppBar(
         color: Colors.transparent,
         elevation: 0.0,
         child: new Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(bottom: 30),
           child: new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              new RoundIconButton.small(
-                icon: Icons.refresh,
-                iconColor: Colors.orange,
-                onPressed: () {},
-              ),
+              // new RoundIconButton.small(
+              //   icon: Icons.refresh,
+              //   iconColor: Colors.orange,
+              //   onPressed: () {},
+              // ),
               new RoundIconButton.large(
                 icon: Icons.clear,
                 iconColor: Colors.red,
                 onPressed: () {
+                  cardController.triggerLeft();
                   // matchEngine.currentMatch.nope();
                 },
               ),
-              new RoundIconButton.small(
-                icon: Icons.star,
-                iconColor: Colors.blue,
-                onPressed: () {
-                  // matchEngine.currentMatch.superLike();
-                },
-              ),
+              // new RoundIconButton.small(
+              //   icon: Icons.star,
+              //   iconColor: Colors.blue,
+              //   onPressed: () {
+              //     // matchEngine.currentMatch.superLike();
+              //   },
+              // ),
               new RoundIconButton.large(
                 icon: Icons.favorite,
-                iconColor: Colors.green,
+                iconColor: Colors.orange,
                 onPressed: () {
+                  cardController.triggerRight();
                   // matchEngine.currentMatch.like();
                 },
               ),
-              new RoundIconButton.small(
-                icon: Icons.lock,
-                iconColor: Colors.purple,
-                onPressed: () {},
-              ),
+              // new RoundIconButton.small(
+              //   icon: Icons.lock,
+              //   iconColor: Colors.purple,
+              //   onPressed: () {},
+              // ),
             ],
           ),
         ));
@@ -79,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Container(
         height: size.height,
         child: TinderSwapCard(
+          cardController: cardController,
           totalNum: 10,
           maxHeight: size.height * 0.7,
           maxWidth: size.width,
@@ -277,6 +296,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _getCurrentLocation();
+    print(_currentPosition);
     return Scaffold(
       body: getbody(),
       bottomNavigationBar: _buildBottomBar(),
