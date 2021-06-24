@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/bloc/pictureBloc.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/RegisterSubScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +22,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  Widget buildPicture (String data)
+  {
+    return Container(
+      width: 140,
+      height: 140,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          image: NetworkImage(data),
+          fit: BoxFit.cover
+         ),
+      ),
+    );
+  }
+
+
+
   Widget getBody() {
     var size = MediaQuery.of(context).size;
+
+    pictureBloc.getPicture();
     return Container(
       width: size.width * 2,
       height: size.height * 0.55,
@@ -42,16 +62,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              width: 140,
-              height: 140,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://scontent-hkg4-1.xx.fbcdn.net/v/t1.6435-9/157314952_292205995579537_3091515640804872056_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=0debeb&_nc_ohc=66YXWn73VUEAX-CrZuR&_nc_ht=scontent-hkg4-1.xx&oh=813c2fee49ac47db469c6f3ea513065e&oe=60D545F3"),
-                      fit: BoxFit.cover)),
+            StreamBuilder(
+              stream: pictureBloc.picture,
+              builder: (context, AsyncSnapshot<String> snapshot) {
+                if(snapshot.hasData)
+                {
+                  print(snapshot.data);
+                  return buildPicture(snapshot.data);
+                }
+                else if(snapshot.hasError) {
+                  return Text (snapshot.error.toString());
+                }
+                return Center(child: CircularProgressIndicator());
+              },
             ),
+            // Container(
+            //   width: 140,
+            //   height: 140,
+            //   decoration: BoxDecoration(
+            //       shape: BoxShape.circle,
+            //       image: DecorationImage(
+            //           image: NetworkImage(
+            //               "https://scontent-hkg4-1.xx.fbcdn.net/v/t1.6435-9/157314952_292205995579537_3091515640804872056_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=0debeb&_nc_ohc=66YXWn73VUEAX-CrZuR&_nc_ht=scontent-hkg4-1.xx&oh=813c2fee49ac47db469c6f3ea513065e&oe=60D545F3"),
+            //           fit: BoxFit.cover)),
+            // ),
             SizedBox(
               height: 15,
             ),

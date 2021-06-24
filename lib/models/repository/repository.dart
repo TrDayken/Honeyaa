@@ -5,4 +5,6 @@ class Repository {
   ApiProvider apiProvider = ApiProvider();
 
   Future<User> getUser(int id) => apiProvider.getUser(id);
+
+  Future<String> getPicture(int id) => apiProvider.getPicture(id);
 }

@@ -8,7 +8,7 @@ class ApiProvider {
   Client client = Client();
 
   // final _baseUrl = 'http://127.0.0.1:8000/api';
-  final _baseUrl = 'http://2426aab9675b.ngrok.io/api';
+  final _baseUrl = 'http://52a86c66636a.ngrok.io/api';
 
   Future<User> getUser(int id) async {
     final response = await client.get(_baseUrl + '/person/' + id.toString());
@@ -31,6 +31,22 @@ class ApiProvider {
       return Picture.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to get image URL');
+    }
+  }
+
+  Future<String> getPicture(int id ) async {
+    print (_baseUrl + '/getpicture/' +id.toString());
+    final response = await client.get(_baseUrl + '/getpicture/' +id.toString());
+
+    print(response.body.toString());
+
+
+    if(response.statusCode == 200) {
+      var map = jsonDecode(response.body);
+;
+      return map[0]['picture'];
+    } else {
+      throw Exception ('Failed') ; 
     }
   }
 }
