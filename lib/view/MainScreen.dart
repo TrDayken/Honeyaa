@@ -131,6 +131,32 @@ class _MyHomePageState extends State<MyHomePage> {
                                   'https://scontent-hkg4-2.xx.fbcdn.net/v/t31.18172-8/10841892_125844497760765_5091665117199786065_o.jpg?_nc_cat=110&ccb=1-3&_nc_sid=ba80b0&_nc_ohc=dGiNk41WMpoAX_ymzGe&_nc_ht=scontent-hkg4-2.xx&oh=6a0cadfcc2c559b922f41ba3ad6c3135&oe=60F44D36'),
                               fit: BoxFit.cover)),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            //write code here
+                          },
+                          child: Container(
+                            //left
+                            height: size.height * 0.7,
+                            width: size.width * 0.4,
+                            color: Colors.transparent,
+                          ),
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              //write code here
+                            },
+                            child: Container(
+                              //right
+                              height: size.height * 0.7,
+                              width: size.width * 0.4,
+                              color: Colors.transparent,
+                            ))
+                      ],
+                    ),
                     isSwipe
                         ? Row(
                             children: [
