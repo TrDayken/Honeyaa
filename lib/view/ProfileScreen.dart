@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/auth/Methods.dart';
 import 'package:honeyaa_clientside/bloc/pictureBloc.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/RegisterSubScreen.dart';
 import 'package:provider/provider.dart';
@@ -11,12 +12,33 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    var size = MediaQuery.of(context).size;
+    return Column(
       children: [
-        getBody(),
+        Stack(
+          children: [
+            getBody(),
+            Container(
+              height: 45,
+              color: Colors.white,
+            ),
+          ],
+        ),
         Container(
-          height: 45,
-          color: Colors.white,
+          margin: new EdgeInsets.symmetric(vertical: 70),
+          child: MaterialButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            elevation: 0,
+            minWidth: size.width * 0.8,
+            height: 50,
+            onPressed: () {
+              logOut(context);
+            },
+            color: Color(0xffEB9605),
+            child: Text('SignOut',
+                style: TextStyle(color: Colors.white, fontSize: 16)),
+          ),
         ),
       ],
     );

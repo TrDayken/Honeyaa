@@ -18,9 +18,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List itemTemp = [];
   int itemLength = 0;
+  bool isSwipe;
   CardController cardController = new CardController();
   Position _currentPosition;
-  bool isSwipe = false;
   bool swipeDirection = false;
 
   @override
@@ -363,7 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     _getCurrentLocation();
-    print(_currentPosition);
+    //print(_currentPosition);
     isSwipe = false;
     return Scaffold(
       body: getbody(),
