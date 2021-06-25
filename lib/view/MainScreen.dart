@@ -20,6 +20,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int itemLength = 0;
   CardController cardController = new CardController();
   Position _currentPosition;
+  bool isSwipe = false;
+  bool swipeDirection = false;
 
   @override
   void initState() {
@@ -62,6 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 iconColor: Colors.red,
                 onPressed: () {
                   cardController.triggerLeft();
+                  swipeDirection = false;
+                  isSwipe = true;
                   // matchEngine.currentMatch.nope();
                 },
               ),
@@ -77,6 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 iconColor: Colors.orange,
                 onPressed: () {
                   cardController.triggerRight();
+                  swipeDirection = true;
+                  isSwipe = true;
                   // matchEngine.currentMatch.like();
                 },
               ),
@@ -125,6 +131,40 @@ class _MyHomePageState extends State<MyHomePage> {
                                   'https://scontent-hkg4-2.xx.fbcdn.net/v/t31.18172-8/10841892_125844497760765_5091665117199786065_o.jpg?_nc_cat=110&ccb=1-3&_nc_sid=ba80b0&_nc_ohc=dGiNk41WMpoAX_ymzGe&_nc_ht=scontent-hkg4-2.xx&oh=6a0cadfcc2c559b922f41ba3ad6c3135&oe=60F44D36'),
                               fit: BoxFit.cover)),
                     ),
+                    isSwipe
+                        ? Row(
+                            children: [
+                              swipeDirection
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.green)),
+                                      margin: new EdgeInsets.only(
+                                          left: 30, top: 20),
+                                      child: Text(
+                                        "Like",
+                                        style: TextStyle(
+                                            color: Colors.green,
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold),
+                                      ))
+                                  : Container(
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.pink)),
+                                      margin: new EdgeInsets.only(
+                                          left: 250, top: 20),
+                                      child: Text(
+                                        "Nope",
+                                        style: TextStyle(
+                                          color: Colors.pink,
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ))
+                            ],
+                          )
+                        : Container(),
                     Container(
                       width: size.width,
                       height: size.height,
@@ -298,6 +338,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     _getCurrentLocation();
     print(_currentPosition);
+    isSwipe = false;
     return Scaffold(
       body: getbody(),
       bottomNavigationBar: _buildBottomBar(),

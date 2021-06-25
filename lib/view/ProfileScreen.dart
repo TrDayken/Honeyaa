@@ -22,22 +22,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget buildPicture (String data)
-  {
+  Widget buildPicture(String data) {
     return Container(
       width: 140,
       height: 140,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        image: DecorationImage(
-          image: NetworkImage(data),
-          fit: BoxFit.cover
-         ),
+        image: DecorationImage(image: NetworkImage(data), fit: BoxFit.cover),
       ),
     );
   }
-
-
 
   Widget getBody() {
     var size = MediaQuery.of(context).size;
@@ -65,13 +59,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             StreamBuilder(
               stream: pictureBloc.picture,
               builder: (context, AsyncSnapshot<String> snapshot) {
-                if(snapshot.hasData)
-                {
+                if (snapshot.hasData) {
                   print(snapshot.data);
                   return buildPicture(snapshot.data);
-                }
-                else if(snapshot.hasError) {
-                  return Text (snapshot.error.toString());
+                } else if (snapshot.hasError) {
+                  return Text(snapshot.error.toString());
                 }
                 return Center(child: CircularProgressIndicator());
               },
