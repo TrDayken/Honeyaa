@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
-  Widget getbody() {
+  Widget getbody(List<User> data) {
 
 
     var size = MediaQuery.of(context).size;
@@ -221,7 +221,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Row(
                                           children: [
                                             Text(
-                                              "Cuong",
+                                              data[0].name,
+                                              // "Cuong",
                                               style: TextStyle(
                                                   fontSize: 24,
                                                   color: Colors.white,
@@ -377,7 +378,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, AsyncSnapshot<List<User>> snapshot) {
           if(snapshot.hasData)
           {
-            return getbody();
+            return getbody(snapshot.data);
           }
           else if (snapshot.hasError) 
           {
