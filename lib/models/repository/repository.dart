@@ -7,4 +7,6 @@ class Repository {
   Future<User> getUser(int id) => apiProvider.getUser(id);
 
   Future<String> getPicture(int id) => apiProvider.getPicture(id);
+
+  Future<List<User>> getListUser(int id ) => apiProvider.getSwipe(id) ; 
 }

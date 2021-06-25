@@ -8,7 +8,7 @@ class ApiProvider {
   Client client = Client();
 
   // final _baseUrl = 'http://127.0.0.1:8000/api';
-  final _baseUrl = 'http://918179327c5f.ngrok.io/api';
+  final _baseUrl = 'http://c34ffc64b42c.ngrok.io/api';
 
   Future<User> getUser(int id) async {
     final response = await client.get(_baseUrl + '/person/' + id.toString());
@@ -36,7 +36,7 @@ class ApiProvider {
 
   Future<String> getPicture(int id) async {
     print(_baseUrl + '/getpicture/' + id.toString());
-    final response = await client.get(_baseUrl + '/getpicture/1');
+    final response = await client.get(_baseUrl + '/getpicture/' + id.toString());
 
     print(response.body.toString());
 
@@ -46,6 +46,28 @@ class ApiProvider {
       return map[0]['picture'];
     } else {
       throw Exception('Failed');
+    }
+  }
+
+  Future<List<User>> getSwipe(int id ) async {
+    final response = await client.get(_baseUrl + '/person' );
+
+    final userrespone = await client.get(_baseUrl + '/person/' + id.toString());
+
+    Iterable l = json.decode(response.body); 
+
+    List<User> listuser = List<User>.from( l.map((e) => User.fromJson(e)));
+    // print (listuser) ; 
+
+    User u = User.fromJson(json.decode(userrespone.body));
+    
+    listuser.remove(u) ; 
+
+    print(listuser) ; 
+    if(response.statusCode == 200 && userrespone.statusCode == 200) {
+      return listuser;
+    } else {
+      throw Exception ('list empty');
     }
   }
 }

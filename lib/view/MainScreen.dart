@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:honeyaa_clientside/bloc/userListBloc.dart';
+import 'package:honeyaa_clientside/models/User.dart';
 import 'package:honeyaa_clientside/view/ProfileScreen.dart';
 
 import '../component//RoundIconButton.dart';
@@ -97,6 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget getbody() {
+
+
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
@@ -362,11 +366,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    listuserBloc.getListUser(); 
+    
     _getCurrentLocation();
     //print(_currentPosition);
     isSwipe = false;
     return Scaffold(
-      body: getbody(),
+      body: StreamBuilder(
+        stream: listuserBloc.listuser,
+        builder: (context, AsyncSnapshot<List<User>> snapshot) {
+          if(snapshot.hasData)
+          {
+            return getbody();
+          }
+          else if (snapshot.hasError) 
+          {
+            return Text(snapshot.error.toString());
+          }
+          return Center(child: CircularProgressIndicator()) ;
+        },
+      ),
       bottomNavigationBar: _buildBottomBar(),
     );
   }
