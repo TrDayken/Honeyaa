@@ -4,9 +4,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:honeyaa_clientside/auth/Methods.dart';
+import 'package:honeyaa_clientside/component/ProgressDialog.dart';
+import 'package:honeyaa_clientside/view/MainHub.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/RegisterScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/RegisterSubScreen.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -33,6 +36,15 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
+  void initState() {
+    //  set time to load the new page
+    Future.delayed(Duration(seconds: 5), () {
+      //Navigator.pushNamed(context, '/mainhub');
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -45,9 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
         body: isLoading
             ? Center(
                 child: Container(
-                height: size.height / 15,
-                width: size.height / 15,
-                child: CircularProgressIndicator(),
+                height: size.height / 5,
+                width: size.height / 5,
+                child: Lottie.asset('assets/lottie/honey-bee.json'),
               ))
             : Container(
                 alignment: Alignment.topCenter,
@@ -143,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               print(user.uid);
                               if (user != null) {
                                 setState(() {
-                                  isLoading = false;
+                                  //isLoading = true;
                                 });
                                 Navigator.pushNamed(context, "/mainhub");
                                 print("Login Sucessfull");
@@ -195,10 +207,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             final displayName = value.user.displayName;
                             final test = value.user.uid;
                             print(test);
+                            isLoading = true;
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MyHomePage()),
+                                    builder: (context) => MainHub()),
                                 (route) => false);
                           });
                         },
