@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honeyaa_clientside/auth/Authentication.dart';
+import 'package:honeyaa_clientside/view/ChatHistoryView.dart';
 import 'package:honeyaa_clientside/view/ProfileEditScreen.dart';
 import 'package:honeyaa_clientside/view/ProfileScreen.dart';
 
@@ -19,8 +20,8 @@ class RouteHandler {
         return MaterialPageRoute(builder: (_) => Splash());
       case '/mainscreen':
         return MaterialPageRoute(builder: (_) => MyHomePage());
-      case '/chatscreen':
-        return MaterialPageRoute(builder: (_) => ChatScreen());
+      // case '/chatscreen':
+      //   return MaterialPageRoute(builder: (_) => ChatScreen());
       case '/mainhub':
         return MaterialPageRoute(builder: (_) => MainHub());
       case '/login':
@@ -35,6 +36,8 @@ class RouteHandler {
         return MaterialPageRoute(builder: (_) => RegisterSubScreen());
       case '/profileEdit':
         return MaterialPageRoute(builder: (_) => ProfileEditScreen()); 
+      case '/chathistory':
+        return MaterialPageRoute(builder: (_) => ChatHistory()); 
       default:
         return _errorRoute();
     }

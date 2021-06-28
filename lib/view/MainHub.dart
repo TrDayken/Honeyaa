@@ -38,7 +38,7 @@ class _MainHubState extends State<MainHub> {
             children: [
               MyHomePage(),
               LikeScreen(),
-              ChatHistoryView(),
+              ChatHistory(),
               ProfileScreen(),
             ],
           ),
