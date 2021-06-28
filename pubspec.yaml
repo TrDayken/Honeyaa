@@ -30,9 +30,9 @@ dependencies:
   lottie: ^0.6.0
   flutter_hooks: ^0.12.0
   stacked: ^2.0.4
-  shared_preferences: ^2.0.5
   firebase_auth: "^0.20.1"
   firebase_core : ^0.7.0
+  cloud_firestore:
   google_sign_in: 
   font_awesome_flutter: 
   google_fonts:
@@ -45,6 +45,8 @@ dependencies:
   flutter_tindercard: ^0.2.0
   geocoding: ^1.0.5
   geolocator: ^6.1.1
+  shared_preferences:
+  random_string: ^2.1.0
 
 dev_dependencies:
   flutter_test:

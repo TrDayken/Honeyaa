@@ -367,7 +367,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    listuserBloc.getListUser(); 
+    //listuserBloc.getListUser(); 
     
     _getCurrentLocation();
     //print(_currentPosition);

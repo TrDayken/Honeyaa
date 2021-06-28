@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         primaryColorBrightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/login',
+      initialRoute: '/mainhub',
       onGenerateRoute: RouteHandler.generateRoute,
     );
   }
