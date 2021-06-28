@@ -11,6 +11,8 @@ import 'package:honeyaa_clientside/view/RegisterScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/RegisterSubScreen.dart';
 import 'package:lottie/lottie.dart';
 
+import '../Global.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -206,6 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           signinWithGoogle().then((UserCredential value) {
                             final displayName = value.user.displayName;
                             final test = value.user.uid;
+                            Global.uid = test;
                             print(test);
                             isLoading = true;
                             Navigator.pushAndRemoveUntil(

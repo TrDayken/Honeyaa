@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget getBody() {
     var size = MediaQuery.of(context).size;
 
-    pictureBloc.getPicture();
+    pictureBloc.getPicture(5);
     return Container(
       width: size.width * 2,
       height: size.height * 0.55,

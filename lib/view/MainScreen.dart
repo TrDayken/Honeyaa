@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:honeyaa_clientside/bloc/pictureBloc.dart';
 import 'package:honeyaa_clientside/bloc/userListBloc.dart';
 import 'package:honeyaa_clientside/models/User.dart';
+import 'package:honeyaa_clientside/networking/ApiProvider.dart';
 import 'package:honeyaa_clientside/view/ProfileScreen.dart';
 
 import '../component//RoundIconButton.dart';
@@ -108,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
         height: size.height,
         child: TinderSwapCard(
           cardController: cardController,
-          totalNum: 10,
+          totalNum: data.length,
           maxHeight: size.height * 0.7,
           maxWidth: size.width,
           minWidth: size.width * 0.75,
@@ -126,15 +128,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 borderRadius: BorderRadius.circular(10),
                 child: Stack(
                   children: [
-                    Container(
-                      width: size.width,
-                      height: size.height,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  'https://scontent-hkg4-2.xx.fbcdn.net/v/t31.18172-8/10841892_125844497760765_5091665117199786065_o.jpg?_nc_cat=110&ccb=1-3&_nc_sid=ba80b0&_nc_ohc=dGiNk41WMpoAX_ymzGe&_nc_ht=scontent-hkg4-2.xx&oh=6a0cadfcc2c559b922f41ba3ad6c3135&oe=60F44D36'),
-                              fit: BoxFit.cover)),
-                    ),
+                    // Container(
+                    //   width: size.width,
+                    //   height: size.height,
+                    //   decoration: BoxDecoration(
+                    //       image: DecorationImage(
+                    //           image: NetworkImage(
+                    //               'https://scontent-hkg4-2.xx.fbcdn.net/v/t31.18172-8/10841892_125844497760765_5091665117199786065_o.jpg?_nc_cat=110&ccb=1-3&_nc_sid=ba80b0&_nc_ohc=dGiNk41WMpoAX_ymzGe&_nc_ht=scontent-hkg4-2.xx&oh=6a0cadfcc2c559b922f41ba3ad6c3135&oe=60F44D36'),
+                    //           fit: BoxFit.cover)),
+                    // ),
+                    StreamBuilder(
+              stream: pictureBloc.picture,
+              builder: (context, AsyncSnapshot<String> snapshot) {
+                  final id = data[index].url[data[index].url.length -2];
+                  print (id) ;
+
+                  pictureBloc.getPicture(int.parse(id));
+                if (snapshot.hasData) {
+                  print(snapshot.data);
+                  return buildPicture(snapshot.data);
+                } else if (snapshot.hasError) {
+                  return Text(snapshot.error.toString());
+                }
+                return Center(child: CircularProgressIndicator());
+              },
+            ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -221,7 +239,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Row(
                                           children: [
                                             Text(
-                                              data[0].name,
+                                              data[index].name,
                                               // "Cuong",
                                               style: TextStyle(
                                                   fontSize: 24,
@@ -364,6 +382,21 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+    Widget buildPicture(String data) {
+    var size = MediaQuery.of(context).size;
+
+    return Container(
+      width: size.width,
+      height: size.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(image: NetworkImage(data), fit: BoxFit.cover),
+      ),
+    );
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {

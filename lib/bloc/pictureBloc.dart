@@ -10,8 +10,8 @@ class PictureBloc {
 
   Observable<String> get picture => _picture.stream;
 
-  getPicture() async {
-    String picture = await _repo.getPicture(5);
+  getPicture(int id) async {
+    String picture = await _repo.getPicture(id);
 
     _picture.sink.add(picture) ; 
   }
