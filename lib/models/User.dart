@@ -4,12 +4,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 class User extends Equatable {
-  User ({ this.url, this.uid,  this.name , this.oriented, this.interested});
+  User ({ this.url, this.uid,  this.name , this.oriented,this.personpicture, this.interested});
 
   String url; 
   String uid;
   String name;
   String oriented;
+  String personpicture;
   List<String> swipeperson;
   List<String> interested;
 
@@ -18,6 +19,7 @@ class User extends Equatable {
     this.uid = json['uid']; 
     this.name = json['_name']; 
     this.oriented = json['oriented']; 
+    this.personpicture = json ['personpicture'];
     this.swipeperson = new List<String>.from(json['swipePerson']);
     this.interested = new List<String>.from(json['interested']);
   }

@@ -3,6 +3,7 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:honeyaa_clientside/bloc/pictureBloc.dart';
 import 'package:honeyaa_clientside/bloc/userListBloc.dart';
+import 'package:honeyaa_clientside/models/Picture.dart';
 import 'package:honeyaa_clientside/models/User.dart';
 import 'package:honeyaa_clientside/networking/ApiProvider.dart';
 import 'package:honeyaa_clientside/view/ProfileScreen.dart';
@@ -26,14 +27,26 @@ class _MyHomePageState extends State<MyHomePage> {
   CardController cardController = new CardController();
   Position _currentPosition;
   bool swipeDirection = false;
+  bool fetched = false;
+  // bool processed = false;
+
+  List<PictureBloc> pictures = [];
+  List<bool> processed = [];
+  List<String> urls = [];
+
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      //itemTemp = explore_json;
-      //itemLength = explore_json.lenght;
-    });
+
+    listuserBloc.getListUser(); 
+
+    processed = List.filled(50, false);
+
+    // setState(() {
+    //   //itemTemp = explore_json;
+    //   //itemLength = explore_json.lenght;
+    // });
   }
 
   _getCurrentLocation() {
@@ -87,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   cardController.triggerRight();
                   swipeDirection = true;
                   isSwipe = true;
+                  pictureBloc.dispose();
                   // matchEngine.currentMatch.like();
                 },
               ),
@@ -100,8 +114,38 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
+
   Widget getbody(List<User> data) {
 
+    // for(int y = 0 ; y < data.length; y ++)
+    // {
+    //   if (processed[y] == true)
+    //   {
+    //     continue;
+    //   }
+
+    //   for (int i = 0 ; i < data.length; i ++)
+    //   {
+    //   return StreamBuilder(
+    //       stream: pictures[y].picture,
+    //       builder: (context, AsyncSnapshot<String> snapshot) {
+    //           // final id = data[index].url[data[index].url.length -2];
+    //           // print (id) ;
+    //           // pictureBloc.getPicture(int.parse(id));
+    //         if (snapshot.hasData) {
+    //           print(snapshot.data);
+              
+    //           urls.add(snapshot.data);
+    //           processed[y] = true; 
+    //           // return buildPicture(snapshot.data);
+    //         } else if (snapshot.hasError) {
+    //           return Text(snapshot.error.toString());
+    //         }
+    //         return Center(child: CircularProgressIndicator());
+    //       },
+    //     ); 
+    //   }
+    // }
 
     var size = MediaQuery.of(context).size;
     return Padding(
@@ -128,37 +172,38 @@ class _MyHomePageState extends State<MyHomePage> {
                 borderRadius: BorderRadius.circular(10),
                 child: Stack(
                   children: [
-                    // Container(
-                    //   width: size.width,
-                    //   height: size.height,
-                    //   decoration: BoxDecoration(
-                    //       image: DecorationImage(
-                    //           image: NetworkImage(
-                    //               'https://scontent-hkg4-2.xx.fbcdn.net/v/t31.18172-8/10841892_125844497760765_5091665117199786065_o.jpg?_nc_cat=110&ccb=1-3&_nc_sid=ba80b0&_nc_ohc=dGiNk41WMpoAX_ymzGe&_nc_ht=scontent-hkg4-2.xx&oh=6a0cadfcc2c559b922f41ba3ad6c3135&oe=60F44D36'),
-                    //           fit: BoxFit.cover)),
-                    // ),
-                    StreamBuilder(
-              stream: pictureBloc.picture,
-              builder: (context, AsyncSnapshot<String> snapshot) {
-                  final id = data[index].url[data[index].url.length -2];
-                  print (id) ;
+                     Container(
+                      width: size.width,
+                      height: size.height,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image:NetworkImage(urls[index]),
+                              fit: BoxFit.cover)),
+                    ),
+                    // StreamBuilder(
+                    //   stream: pictures[index].picture,
+                    //   builder: (context, AsyncSnapshot<String> snapshot) {
+                    //       // final id = data[index].url[data[index].url.length -2];
+                    //       // print (id) ;
+                    //       // pictureBloc.getPicture(int.parse(id));
+                    //     if (snapshot.hasData) {
 
-                  pictureBloc.getPicture(int.parse(id));
-                if (snapshot.hasData) {
-                  print(snapshot.data);
-                  return buildPicture(snapshot.data);
-                } else if (snapshot.hasError) {
-                  return Text(snapshot.error.toString());
-                }
-                return Center(child: CircularProgressIndicator());
-              },
-            ),
+                    //       // print(index);
+                    //       // print(snapshot.data);
+
+                    //       return buildPicture(snapshot.data);
+                    //     } else if (snapshot.hasError) {
+                    //       return Text(snapshot.error.toString());
+                    //     }
+                    //     return Center(child: CircularProgressIndicator());
+                    //   },
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GestureDetector(
                           onTap: () {
-                            //write code here
+                            // pictureBloc.dispose();
                           },
                           child: Container(
                             //left
@@ -400,7 +445,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //listuserBloc.getListUser(); 
     
     _getCurrentLocation();
     //print(_currentPosition);
@@ -411,11 +455,29 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, AsyncSnapshot<List<User>> snapshot) {
           if(snapshot.hasData)
           {
+            if(fetched == false) 
+            {
+              for(int i = 0 ; i < snapshot.data.length; i ++){
+                final id = snapshot.data[i].url[snapshot.data[i].url.length -2];
+
+                PictureBloc x = new PictureBloc();
+
+                x.getPicture(int.parse(id));
+
+                pictures.add(x) ; 
+
+                urls.add(snapshot.data[i].personpicture);
+              }
+
+
+              fetched = true;
+            }
+
             return getbody(snapshot.data);
           }
           else if (snapshot.hasError) 
           {
-            return Text(snapshot.error.toString());
+            return Text(snapshot.error.toString()); 
           }
           return Center(child: CircularProgressIndicator()) ;
         },

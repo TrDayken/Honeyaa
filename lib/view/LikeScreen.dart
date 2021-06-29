@@ -8,6 +8,7 @@ class LikeScreen extends StatefulWidget {
 class _LikeScreenState extends State<LikeScreen> {
   @override
   Widget build(BuildContext context) {
+    print("you are at like screen");
     return Scaffold(
       backgroundColor: Colors.white,
       body: getBody(),

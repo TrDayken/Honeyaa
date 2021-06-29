@@ -8,7 +8,7 @@ class ApiProvider {
   Client client = Client();
 
   // final _baseUrl = 'http://127.0.0.1:8000/api';
-  final _baseUrl = 'http://fd6c9603a01d.ngrok.io/api';
+  final _baseUrl = 'http://26a1acfa94b4.ngrok.io/api';
 
   Future<User> getUser(int id) async {
     final response = await client.get(_baseUrl + '/person/' + id.toString());
@@ -53,6 +53,28 @@ class ApiProvider {
     final response = await client.get(_baseUrl + '/person' );
 
     final userrespone = await client.get(_baseUrl + '/person/' + id.toString());
+
+    Iterable l = json.decode(response.body); 
+
+    List<User> listuser = List<User>.from( l.map((e) => User.fromJson(e)));
+    // print (listuser) ; 
+
+    User u = User.fromJson(json.decode(userrespone.body));
+    
+    listuser.remove(u) ; 
+
+    print(listuser) ; 
+    if(response.statusCode == 200 && userrespone.statusCode == 200) {
+      return listuser;
+    } else {
+      throw Exception ('list empty');
+    }
+  }
+
+    Future<List<User>> getliked(int id ) async {
+    final response = await client.get(_baseUrl + '/person' );
+
+    final userrespone = await client.get(_baseUrl + '/getlikedperson/' + id.toString());
 
     Iterable l = json.decode(response.body); 
 
