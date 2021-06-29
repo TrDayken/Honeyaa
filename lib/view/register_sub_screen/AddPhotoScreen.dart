@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:honeyaa_clientside/component/ImagePortrait.dart';
 import 'package:honeyaa_clientside/component/RoundIconButton.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:random_string/random_string.dart';
 
 class AddPhotoScreen extends StatefulWidget {
   final Function(String) onPhotoChanged;
@@ -20,10 +24,17 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
 
   Future pickImageFromGallery() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
+     var file = File(pickedFile.path);
+    final _storage = FirebaseStorage.instance;
+    
     if (pickedFile != null) {
-      widget.onPhotoChanged(pickedFile.path);
-
+      var snapshot = await _storage.ref()
+        .child(randomAlphaNumeric(10))
+        .putFile(file)
+        .whenComplete(() => {print('Upload Success')});
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+        widget.onPhotoChanged(downloadUrl);
+        print(downloadUrl);
       setState(() {
         _imagePath = pickedFile.path;
       });
