@@ -4,6 +4,7 @@ import 'package:honeyaa_clientside/models/UserRegistration.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/AddPhotoScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/AgeScreen.dart';
+import 'package:honeyaa_clientside/view/register_sub_screen/GenderScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/HobbyScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/NameScreen.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -21,7 +22,7 @@ const kDefaultPadding = EdgeInsets.symmetric(
 class _RegisterSubScreenState extends State<RegisterSubScreen> {
   bool isLoading = false;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final int _endScreenIndex = 3;
+  final int _endScreenIndex = 4;
   int _currentScreenIndex = 0;
   final UserRegistration _userRegistration = UserRegistration();
   final Color primaryColor = Colors.white;
@@ -52,6 +53,8 @@ class _RegisterSubScreenState extends State<RegisterSubScreen> {
         return (_userRegistration.age >= 13 && _userRegistration.age <= 120);
       case 2:
         return _userRegistration.localProfilePhotoPath.isNotEmpty;
+      case 3:
+        return _userRegistration.gender.isNotEmpty;
       default:
         return false;
     }
@@ -96,8 +99,12 @@ class _RegisterSubScreenState extends State<RegisterSubScreen> {
             onPhotoChanged: (value) =>
                 {_userRegistration.localProfilePhotoPath = value});
       case 3:
+        return GenderScreen(
+          onChanged: (value) => {_userRegistration.gender = value},
+        );
+      case 4:
         return HobbyScreen(
-          onChanged: (value) => {},
+          onChanged: (value) => {_userRegistration.age = value},
         );
       default:
         return Container();

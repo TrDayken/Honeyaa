@@ -10,7 +10,10 @@ class HobbyScreen extends StatefulWidget {
 }
 
 class _HobbyScreenState extends State<HobbyScreen> {
-  bool _isChecked = false;
+   bool _isChecked = false;
+   bool _isChecked2 = false;
+   bool _isChecked3 = false;
+   bool _isChecked4 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +74,10 @@ class _HobbyScreenState extends State<HobbyScreen> {
               color: Colors.black,
               size: 25,
             ),
-            value: _isChecked,
+            value: _isChecked2,
             onChanged: (bool value) {
               setState(() {
-                _isChecked = value;
+                _isChecked2 = value;
               });
             },
           ),
@@ -97,10 +100,10 @@ class _HobbyScreenState extends State<HobbyScreen> {
               color: Colors.black,
               size: 25,
             ),
-            value: _isChecked,
+            value: _isChecked3,
             onChanged: (bool value) {
               setState(() {
-                _isChecked = value;
+                _isChecked3 = value;
               });
             },
           ),
@@ -123,10 +126,10 @@ class _HobbyScreenState extends State<HobbyScreen> {
               color: Colors.black,
               size: 25,
             ),
-            value: _isChecked,
+            value: _isChecked4,
             onChanged: (bool value) {
               setState(() {
-                _isChecked = value;
+                _isChecked4 = value;
               });
             },
           ),

@@ -4,4 +4,5 @@ class UserRegistration {
   String email = '';
   String uid = '';
   String localProfilePhotoPath = '';
+   String gender = '';
 }
