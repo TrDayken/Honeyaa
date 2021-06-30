@@ -16,6 +16,12 @@ class ListUserBloc {
     _listuser.sink.add(listuser);
   }
 
+  getLikedUser() async {
+    List <User> listuser = await _repo.getLikedUser(5 );
+
+    _listuser.sink.add(listuser);
+  }
+
   dispose() {
     _listuser.close();
   }

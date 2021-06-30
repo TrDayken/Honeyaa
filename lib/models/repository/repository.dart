@@ -9,4 +9,6 @@ class Repository {
   Future<String> getPicture(int id) => apiProvider.getPicture(id);
 
   Future<List<User>> getListUser(int id ) => apiProvider.getSwipe(id) ; 
+
+  Future<List<User>> getLikedUser(int id) => apiProvider.getliked(id);
 }
