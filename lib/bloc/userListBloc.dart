@@ -17,7 +17,7 @@ class ListUserBloc {
   }
 
   getLikedUser() async {
-    List <User> listuser = await _repo.getLikedUser(5 );
+    List <User> listuser = await _repo.getLikedUser(5);
 
     _listuser.sink.add(listuser);
   }

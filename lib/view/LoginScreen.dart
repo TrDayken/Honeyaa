@@ -5,12 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:honeyaa_clientside/auth/HelperFunctions.dart';
 import 'package:honeyaa_clientside/auth/Methods.dart';
+import 'package:honeyaa_clientside/bloc/idBloc.dart';
 import 'package:honeyaa_clientside/component/ProgressDialog.dart';
+import 'package:honeyaa_clientside/networking/ApiProvider.dart';
 import 'package:honeyaa_clientside/view/MainHub.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/RegisterScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/RegisterSubScreen.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Global.dart';
 
@@ -45,6 +48,18 @@ class _LoginScreenState extends State<LoginScreen> {
       //Navigator.pushNamed(context, '/mainhub');
     });
     super.initState();
+  }
+
+  setUIDPref(String uid) async {
+    await SharedPreferenceHelper().saveUserUID(uid);
+  }
+
+  setUserid(String uid) async {
+    String id = await ApiProvider().getID(uid);
+
+    print(id) ;
+
+    await SharedPreferenceHelper().saveUserId(id);
   }
 
   @override
@@ -156,6 +171,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             logIn(nameController.text, passwordController.text)
                                 .then((user) {
                               print(user.uid);
+                              setUIDPref(user.uid);
+                              setUserid(user.uid);
                               if (user != null) {
                                 setState(() {
                                   //isLoading = true;

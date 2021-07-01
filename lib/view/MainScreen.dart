@@ -117,36 +117,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget getbody(List<User> data) {
 
-    // for(int y = 0 ; y < data.length; y ++)
-    // {
-    //   if (processed[y] == true)
-    //   {
-    //     continue;
-    //   }
-
-    //   for (int i = 0 ; i < data.length; i ++)
-    //   {
-    //   return StreamBuilder(
-    //       stream: pictures[y].picture,
-    //       builder: (context, AsyncSnapshot<String> snapshot) {
-    //           // final id = data[index].url[data[index].url.length -2];
-    //           // print (id) ;
-    //           // pictureBloc.getPicture(int.parse(id));
-    //         if (snapshot.hasData) {
-    //           print(snapshot.data);
-              
-    //           urls.add(snapshot.data);
-    //           processed[y] = true; 
-    //           // return buildPicture(snapshot.data);
-    //         } else if (snapshot.hasError) {
-    //           return Text(snapshot.error.toString());
-    //         }
-    //         return Center(child: CircularProgressIndicator());
-    //       },
-    //     ); 
-    //   }
-    // }
-
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),

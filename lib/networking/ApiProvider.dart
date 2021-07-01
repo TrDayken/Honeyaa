@@ -9,7 +9,7 @@ class ApiProvider {
   Client client = Client();
 
   // final _baseUrl = 'http://127.0.0.1:8000/api';
-  final _baseUrl = 'http://a0ee0a0ddde6.ngrok.io/api';
+  final _baseUrl = 'http://1b71d13c5c8b.ngrok.io/api';
 
   Future<User> getUser(int id) async {
     final response = await client.get(_baseUrl + '/person/' + id.toString());
@@ -50,7 +50,7 @@ class ApiProvider {
     }
   }
 
-      Future<List<User>> getliked(int id ) async {
+  Future<List<User>> getliked(int id ) async {
     // final response = await client.get(_baseUrl + '/person' );
 
     final userrespone = await client.get(_baseUrl + '/getlikedperson/' + id.toString());
@@ -104,5 +104,14 @@ class ApiProvider {
     }
   }
 
+  Future<String> getID (String uid) async {
+    print (_baseUrl + '/getinfo'+ uid);
+    final response = await client.get(_baseUrl + '/getinfo/'+ uid); 
 
+    if(response.statusCode == 200) {
+      var map = jsonDecode(response.body) ;
+      return map[0]['id'].toString();
+    }
+    else throw Exception('Failed');
+  }
 }
