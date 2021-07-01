@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/auth/HelperFunctions.dart';
 import 'package:honeyaa_clientside/bloc/userListBloc.dart';
 import 'package:honeyaa_clientside/models/User.dart';
 
@@ -8,11 +9,18 @@ class LikeScreen extends StatefulWidget {
 }
 
 class _LikeScreenState extends State<LikeScreen> {
+  getBloc() async {
+    String id = await SharedPreferenceHelper().getUserId();
+
+    listuserBloc.getLikedUser(int.parse(id)); 
+  }
+
+
   @override 
   void initState() {
     super.initState();
 
-    listuserBloc.getLikedUser();
+    getBloc();
   }
 
   @override

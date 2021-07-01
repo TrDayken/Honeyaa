@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:honeyaa_clientside/auth/HelperFunctions.dart';
 import 'package:honeyaa_clientside/bloc/pictureBloc.dart';
 import 'package:honeyaa_clientside/bloc/userListBloc.dart';
 import 'package:honeyaa_clientside/models/Picture.dart';
@@ -34,12 +35,17 @@ class _MyHomePageState extends State<MyHomePage> {
   List<bool> processed = [];
   List<String> urls = [];
 
+  getBloc() async {
+    String id = await SharedPreferenceHelper().getUserId();
+
+    listuserBloc.getListUser(int.parse(id));
+  }
 
   @override
   void initState() {
     super.initState();
 
-    listuserBloc.getListUser(); 
+    getBloc();
 
     processed = List.filled(50, false);
 

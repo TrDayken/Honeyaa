@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/auth/HelperFunctions.dart';
 import 'package:honeyaa_clientside/bloc/userBloc.dart';
 import 'package:honeyaa_clientside/models/User.dart';
 
@@ -64,9 +65,16 @@ class ProfileEditScreen extends StatefulWidget {
       );
     }
 
+    getBloc() async {
+      String id = await SharedPreferenceHelper().getUserId();
+
+      userBloc.getUser(int.parse(id));
+    }
+
     @override 
     Widget build (BuildContext context) {
-      userBloc.getUser();
+
+      getBloc();
 
       return Scaffold(
         appBar: _buildAppBar(),

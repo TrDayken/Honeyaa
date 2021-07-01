@@ -10,8 +10,8 @@ class UserBloc {
 
   Observable<User> get user => _user.stream;
 
-  getUser() async {
-    User user = await _repo.getUser(5);
+  getUser(int id) async {
+    User user = await _repo.getUser(id);
 
     _user.sink.add(user);
   }

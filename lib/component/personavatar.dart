@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/auth/HelperFunctions.dart';
 import 'package:honeyaa_clientside/models/User.dart';
 
 import 'RoundIconButton.dart';
@@ -39,10 +40,16 @@ class _PersonAvatar extends State<PersonAvatar>
     );
   }
 
+  getBloc() async {
+    String id = await SharedPreferenceHelper().getUserId();
+
+    userBloc.getUser(int.parse(id)); 
+  }
+
   @override
   Widget build (BuildContext context) 
   {
-    userBloc.getUser();
+    getBloc();
 
     return StreamBuilder(
       stream: userBloc.user,

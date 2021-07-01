@@ -1,3 +1,4 @@
+import 'package:honeyaa_clientside/models/id.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:honeyaa_clientside/models/User.dart';
@@ -10,14 +11,14 @@ class ListUserBloc {
 
   Observable<List<User>> get listuser => _listuser.stream;
 
-  getListUser() async {
-    List<User> listuser = await _repo.getListUser(5);
+  getListUser(int id) async {
+    List<User> listuser = await _repo.getListUser(id);
 
     _listuser.sink.add(listuser);
   }
 
-  getLikedUser() async {
-    List <User> listuser = await _repo.getLikedUser(5);
+  getLikedUser(int id) async {
+    List <User> listuser = await _repo.getLikedUser(id);
 
     _listuser.sink.add(listuser);
   }
