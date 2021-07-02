@@ -2,10 +2,9 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/models/UserRegistration.dart';
 
 class User extends Equatable {
-  User ({ this.url, this.uid,  this.name , this.oriented,this.personpicture, this.interested});
-
   String url; 
   String uid;
   String name;
@@ -13,6 +12,18 @@ class User extends Equatable {
   String personpicture;
   List<String> swipeperson;
   List<String> interested;
+  
+  User ({ this.url, this.uid,  this.name , this.oriented,this.personpicture, this.interested});
+
+  User.fromUserRegistration( UserRegistration usertype)
+  {
+    this.name = usertype.name;
+    this.uid = usertype.uid;
+    this.personpicture = usertype.localProfilePhotoPath;
+    this.oriented = usertype.gender;
+    this.interested = usertype.hobby;
+  }
+
 
   User.fromJson(Map<String , dynamic> json) {
     this.url = json['url']; 
@@ -27,7 +38,22 @@ class User extends Equatable {
   String toString() {
     String result = '';
 
-    result = '{ "url": "$url", "uid": "$uid", "_name": "$name", "oriented": "$oriented" }';
+    String interest = '[@param]';
+    String param = '';
+    for (int i = 0  ; i < interested.length; i ++) 
+    {
+      param += '"' + interested[i] + '"' + ',';
+    }
+
+    param = param.substring(0, param.length-1); 
+
+    String newinterest = interest.replaceAll("@param", param);
+
+    print(interest);
+
+    result = '{ "url": "$url", "uid": "$uid", "_name": "$name","personpicture": "$personpicture", "oriented": "http://127.0.0.1:8000/api/oriented/10/", "interested": $newinterest}';
+
+    print (result);
 
     return result; 
   }

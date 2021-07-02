@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:honeyaa_clientside/networking/ApiProvider.dart';
+
 class HobbyScreen extends StatefulWidget {
-  final Function(num) onChanged;
+  final Function(List<String>) onChanged;
 
   HobbyScreen({@required this.onChanged});
 
@@ -15,8 +17,15 @@ class _HobbyScreenState extends State<HobbyScreen> {
    bool _isChecked3 = false;
    bool _isChecked4 = false;
 
+   List<String> result = [] ; 
+
+   
+
   @override
   Widget build(BuildContext context) {
+
+    print(result);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,8 +59,17 @@ class _HobbyScreenState extends State<HobbyScreen> {
             ),
             value: _isChecked,
             onChanged: (bool value) {
-              setState(() {
+              if(value)
+              {
+                result.add(ApiProvider().baseUrl +"/interest/1/");
+              }
+              else 
+              {
+                result.remove(ApiProvider().baseUrl + "/interest/1/");
+              }
                 _isChecked = value;
+              setState(() {
+                widget.onChanged(result);
               });
             },
           ),
@@ -76,8 +94,17 @@ class _HobbyScreenState extends State<HobbyScreen> {
             ),
             value: _isChecked2,
             onChanged: (bool value) {
-              setState(() {
+              if(value)
+              {
+                result.add(ApiProvider().baseUrl + "/interest/2/");
+              }
+              else 
+              {
+                result.remove(ApiProvider().baseUrl + "/interest/2/");
+              }
                 _isChecked2 = value;
+              setState(() {
+                widget.onChanged(result);
               });
             },
           ),
@@ -102,8 +129,17 @@ class _HobbyScreenState extends State<HobbyScreen> {
             ),
             value: _isChecked3,
             onChanged: (bool value) {
-              setState(() {
+              if(value)
+              {
+                result.add(ApiProvider().baseUrl + "/interest/3/");
+              }
+              else 
+              {
+                result.remove(ApiProvider().baseUrl + "/interest/3/");
+              }
                 _isChecked3 = value;
+              setState(() {
+                widget.onChanged(result);
               });
             },
           ),
@@ -128,8 +164,17 @@ class _HobbyScreenState extends State<HobbyScreen> {
             ),
             value: _isChecked4,
             onChanged: (bool value) {
-              setState(() {
+              if(value)
+              {
+                result.add(ApiProvider().baseUrl +"/interest/4/");
+              }
+              else 
+              {
+                result.remove(ApiProvider().baseUrl + "/interest/4/");
+              }
                 _isChecked4 = value;
+              setState(() {
+                widget.onChanged(result);
               });
             },
           ),

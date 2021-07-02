@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/auth/HelperFunctions.dart';
 import 'package:honeyaa_clientside/component/custom_modal_progress_hud.dart';
+import 'package:honeyaa_clientside/models/User.dart';
 import 'package:honeyaa_clientside/models/UserRegistration.dart';
+import 'package:honeyaa_clientside/networking/ApiProvider.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/AddPhotoScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/AgeScreen.dart';
@@ -104,13 +107,23 @@ class _RegisterSubScreenState extends State<RegisterSubScreen> {
         );
       case 4:
         return HobbyScreen(
-          onChanged: (value) => {_userRegistration.age = value},
+          onChanged: (value) => {_userRegistration.hobby = value},
         );
       default:
         return Container();
     }
   }
 
+   createUser(UserRegistration user) async {
+     String uid = await SharedPreferenceHelper().getUserUID(); 
+
+     User postmodel = User.fromUserRegistration(user);
+     postmodel.uid = uid; 
+
+     print (postmodel) ;
+     return await ApiProvider().postUser(postmodel);
+   }
+   
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -185,7 +198,7 @@ class _RegisterSubScreenState extends State<RegisterSubScreen> {
                           color: secondaryColor,
                           onPressed: isLoading == false
                               ? () => {
-                                    // registerUser()
+                                    createUser(_userRegistration) ?? NullThrownError()
                                   }
                               : null)
                       : MaterialButton(

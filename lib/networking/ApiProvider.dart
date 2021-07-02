@@ -8,11 +8,11 @@ import 'package:honeyaa_clientside/models/User.dart';
 class ApiProvider {
   Client client = Client();
 
-  // final _baseUrl = 'http://127.0.0.1:8000/api';
-  final _baseUrl = 'http://1b71d13c5c8b.ngrok.io/api';
+  // final baseUrl = 'http://127.0.0.1:8000/api';
+  final baseUrl = 'http://396394d95fe7.ngrok.io/api';
 
   Future<User> getUser(int id) async {
-    final response = await client.get(_baseUrl + '/person/' + id.toString());
+    final response = await client.get(baseUrl + '/person/' + id.toString());
 
     print(response.body.toString());
 
@@ -24,7 +24,7 @@ class ApiProvider {
   }
 
   Future<Picture> getImage(int id) async {
-    final response = await client.get(_baseUrl + '' + id.toString());
+    final response = await client.get(baseUrl + '' + id.toString());
 
     print(response.body.toString());
 
@@ -36,8 +36,8 @@ class ApiProvider {
   }
 
   Future<String> getPicture(int id) async {
-    print(_baseUrl + '/getpicture/' + id.toString());
-    final response = await client.get(_baseUrl + '/getpicture/' + id.toString());
+    print(baseUrl + '/getpicture/' + id.toString());
+    final response = await client.get(baseUrl + '/getpicture/' + id.toString());
 
     print(response.body.toString());
 
@@ -51,10 +51,10 @@ class ApiProvider {
   }
 
   Future<List<User>> getliked(int id ) async {
-    // final response = await client.get(_baseUrl + '/person' );
+    // final response = await client.get(baseUrl + '/person' );
 
-    final userrespone = await client.get(_baseUrl + '/getlikedperson/' + id.toString());
-    print (_baseUrl + '/getlikedperson/' + id.toString());
+    final userrespone = await client.get(baseUrl + '/getlikedperson/' + id.toString());
+    print (baseUrl + '/getlikedperson/' + id.toString());
 
     Iterable l = json.decode(userrespone.body);
 
@@ -66,7 +66,7 @@ class ApiProvider {
 
     for (ID i in list)
     {
-      final userresponse = await client.get(_baseUrl + '/person/' + i.id);
+      final userresponse = await client.get(baseUrl + '/person/' + i.id);
 
       User u = User.fromJson(json.decode(userresponse.body)); 
 
@@ -83,9 +83,9 @@ class ApiProvider {
   }
 
   Future<List<User>> getSwipe(int id ) async {
-    final response = await client.get(_baseUrl + '/person' );
+    final response = await client.get(baseUrl + '/person' );
 
-    final userrespone = await client.get(_baseUrl + '/person/' + id.toString());
+    final userrespone = await client.get(baseUrl + '/person/' + id.toString());
 
     Iterable l = json.decode(response.body); 
 
@@ -105,13 +105,34 @@ class ApiProvider {
   }
 
   Future<String> getID (String uid) async {
-    print (_baseUrl + '/getinfo'+ uid);
-    final response = await client.get(_baseUrl + '/getinfo/'+ uid); 
+    print (baseUrl + '/getinfo/'+ uid);
+    final response = await client.get(baseUrl + '/getinfo/'+ uid); 
 
     if(response.statusCode == 200) {
       var map = jsonDecode(response.body) ;
-      return map[0]['id'].toString();
+      if(map.length > 0 ) 
+        return map[0]['id'].toString();
+      else 
+        return (-1).toString(); 
     }
     else throw Exception('Failed');
+  }
+
+  Future<User> postUser(User user) async {
+    final response = await client.post(
+      baseUrl + '/person/', 
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      }, 
+      body: user.toString()
+    ); 
+
+    if(response.statusCode == 201) {
+      return User.fromJson(json.decode(response.body));
+    }
+    else 
+    {
+      throw Exception('Failed to create');
+    }
   }
 }

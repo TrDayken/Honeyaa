@@ -62,6 +62,13 @@ class _LoginScreenState extends State<LoginScreen> {
     await SharedPreferenceHelper().saveUserId(id);
   }
 
+  validate (String uid ) async {
+    String id = await ApiProvider().getID(uid);
+
+    print (id) ;
+    return id ;
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -226,14 +233,30 @@ class _LoginScreenState extends State<LoginScreen> {
                           signinWithGoogle().then((UserCredential value) {
                             final displayName = value.user.displayName;
                             final test = value.user.uid;
-                            Global.uid = test;
                             print(test);
-                            isLoading = true;
-                            Navigator.pushAndRemoveUntil(
+                            var id = validate(test);
+
+                            if ( id != -1) {
+                              setUIDPref(test);
+                              Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MainHub()),
-                                (route) => false);
+                                  builder: (context) => RegisterSubScreen()),
+                                  (route) => false);
+                            }
+                            else 
+                            {
+                              setUIDPref(test);
+                              setUserid(id);
+
+                              isLoading = true;
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MainHub()),
+                                  (route) => false);
+                            }
+                            
                           });
                         },
                         color: Colors.blue,

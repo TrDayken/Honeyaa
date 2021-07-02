@@ -1,8 +1,9 @@
 class UserRegistration {
   String name = '';
   int age = 0;
-  String email = '';
+  // String email = '';
   String uid = '';
   String localProfilePhotoPath = '';
-   String gender = '';
+  String gender = '';
+  List<String> hobby = [];
 }
