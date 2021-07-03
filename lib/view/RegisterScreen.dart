@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:honeyaa_clientside/auth/HelperFunctions.dart';
 import 'package:honeyaa_clientside/auth/Methods.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/RegisterSubScreen.dart';
@@ -23,6 +24,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+
+  setUIDPref(String uid) async {
+    await SharedPreferenceHelper().saveUserUID(uid);
   }
 
   @override
@@ -135,6 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 setState(() {
                                   isLoading = false;
                                 });
+                                setUIDPref(user.uid);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

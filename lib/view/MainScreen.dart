@@ -29,14 +29,22 @@ class _MyHomePageState extends State<MyHomePage> {
   Position _currentPosition;
   bool swipeDirection = false;
   bool fetched = false;
+
+  int temp = 0 ;
   // bool processed = false;
 
   List<PictureBloc> pictures = [];
   List<bool> processed = [];
   List<String> urls = [];
+  List<User> upondata = [];
+  List<User> like = [];
 
   getBloc() async {
     String id = await SharedPreferenceHelper().getUserId();
+
+    like = await ApiProvider().getLike(int.parse(id));
+
+    print (like) ;
 
     listuserBloc.getListUser(int.parse(id));
   }
@@ -89,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   cardController.triggerLeft();
                   swipeDirection = false;
                   isSwipe = true;
+                  // temp ++ ;
                   // matchEngine.currentMatch.nope();
                 },
               ),
@@ -103,11 +112,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icons.favorite,
                 iconColor: Colors.orange,
                 onPressed: () {
+
                   cardController.triggerRight();
                   swipeDirection = true;
                   isSwipe = true;
                   pictureBloc.dispose();
-                  // matchEngine.currentMatch.like();
+                  // temp ++;
+                  print(temp);
+
+                  for (var x in like)
+                  {
+                    if(upondata[temp] == x)
+                    {
+                      print("match !!!!!!!!!!!!!!!!");
+                      return;
+                    }
+                  }
+                  // create Credential
                 },
               ),
               // new RoundIconButton.small(
@@ -123,19 +144,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget getbody(List<User> data) {
 
+    upondata = data; 
+
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Container(
         height: size.height,
         child: TinderSwapCard(
+          swipeCompleteCallback: (context, int index) {
+            // temp = index;
+            // setState(() {
+            //   temp = index;
+            // });
+          },
           cardController: cardController,
           totalNum: data.length,
           maxHeight: size.height * 0.7,
           maxWidth: size.width,
           minWidth: size.width * 0.75,
           minHeight: size.height * 0.5,
-          cardBuilder: (context, index) => Container(
+          cardBuilder: (context, index) { 
+            temp = index;
+            return Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
@@ -398,7 +429,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ],
                 ),
-              )),
+              ));}
         ),
       ),
     );

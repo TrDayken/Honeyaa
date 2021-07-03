@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:honeyaa_clientside/bloc/userBloc.dart';
 import 'package:honeyaa_clientside/models/Picture.dart';
 import 'package:honeyaa_clientside/models/id.dart';
 import 'package:http/http.dart' show Client;
@@ -9,7 +10,7 @@ class ApiProvider {
   Client client = Client();
 
   // final baseUrl = 'http://127.0.0.1:8000/api';
-  final baseUrl = 'http://396394d95fe7.ngrok.io/api';
+  final baseUrl = 'http://527c836c0ea2.ngrok.io/api';
 
   Future<User> getUser(int id) async {
     final response = await client.get(baseUrl + '/person/' + id.toString());
@@ -20,6 +21,23 @@ class ApiProvider {
       return User.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load user');
+    }
+  }
+
+  Future<List<User>> getLike (int id) async {
+    final response = await client.get(baseUrl + '/getlike/' + id.toString());
+
+    print(response.body.toString());
+
+    Iterable l = json.decode(response.body); 
+
+    List<User> listuser = List<User>.from( l.map((e) => User.fromJson(e)));
+
+    if(response.statusCode == 200) {
+      return listuser;
+    }
+    else {
+      throw Exception('failed to load liked user');
     }
   }
 
