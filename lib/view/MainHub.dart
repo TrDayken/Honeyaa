@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_meedu/flutter_meedu.dart';
+import 'package:honeyaa_clientside/notification/pushNotificationRepo.dart';
 import 'package:honeyaa_clientside/view/LikeScreen.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/ProfileScreen.dart';
@@ -13,6 +15,13 @@ class MainHub extends StatefulWidget {
 }
 
 class _MainHubState extends State<MainHub> {
+  @override
+  void initState() {
+    super.initState();
+    final pushNotification = Get.i.find<PushNotification>();
+    pushNotification.initialize("486d8ce2-ec8c-4a58-9408-2b9e05c191c0");
+  }
+
   @override
   Widget build(BuildContext context) {
     final titlepath = 'assets/Honeyaa_logo.png';

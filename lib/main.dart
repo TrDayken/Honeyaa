@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:honeyaa_clientside/RouteHandler/Routing_Handler.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:honeyaa_clientside/notification/dependencyInjection.dart';
 // import 'package:flutter_infinite_list/simple_bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  injectionDependencies();
   // Bloc.observer = SimpleBlocObserver();
   runApp(MyApp());
 }

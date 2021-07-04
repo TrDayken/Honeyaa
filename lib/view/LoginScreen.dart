@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_meedu/flutter_meedu.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -8,6 +9,7 @@ import 'package:honeyaa_clientside/auth/Methods.dart';
 import 'package:honeyaa_clientside/bloc/idBloc.dart';
 import 'package:honeyaa_clientside/component/ProgressDialog.dart';
 import 'package:honeyaa_clientside/networking/ApiProvider.dart';
+import 'package:honeyaa_clientside/notification/pushNotificationRepo.dart';
 import 'package:honeyaa_clientside/view/MainHub.dart';
 import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/RegisterScreen.dart';
@@ -41,13 +43,19 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  // @override
+  // void initState() {
+  //   //  set time to load the new page
+  //   Future.delayed(Duration(seconds: 5), () {
+  //     //Navigator.pushNamed(context, '/mainhub');
+  //   });
+  //   super.initState();
+  // }
   @override
   void initState() {
-    //  set time to load the new page
-    Future.delayed(Duration(seconds: 5), () {
-      //Navigator.pushNamed(context, '/mainhub');
-    });
     super.initState();
+    final pushNotification = Get.i.find<PushNotification>();
+    pushNotification.initialize("486d8ce2-ec8c-4a58-9408-2b9e05c191c0");
   }
 
   setUIDPref(String uid) async {
@@ -57,16 +65,16 @@ class _LoginScreenState extends State<LoginScreen> {
   setUserid(String uid) async {
     String id = await ApiProvider().getID(uid);
 
-    print(id) ;
+    print(id);
 
     await SharedPreferenceHelper().saveUserId(id);
   }
 
-  validate (String uid ) async {
+  validate(String uid) async {
     String id = await ApiProvider().getID(uid);
 
-    print (id) ;
-    return id ;
+    print(id);
+    return id;
   }
 
   @override
@@ -236,18 +244,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             print(test);
                             var id = validate(test);
 
-                            if ( id != -1) {
+                            if (id == -1) {
                               setUIDPref(test);
                               Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RegisterSubScreen()),
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          RegisterSubScreen()),
                                   (route) => false);
-                            }
-                            else 
-                            {
-                              setUIDPref(test);
-                              setUserid(id);
+                            } else {
+                              // setUIDPref(test);
+                              // setUserid(id);
 
                               isLoading = true;
                               Navigator.pushAndRemoveUntil(
@@ -256,7 +263,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       builder: (context) => MainHub()),
                                   (route) => false);
                             }
-                            
                           });
                         },
                         color: Colors.blue,

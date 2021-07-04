@@ -10,7 +10,7 @@ class ApiProvider {
   Client client = Client();
 
   // final baseUrl = 'http://127.0.0.1:8000/api';
-  final baseUrl = 'http://527c836c0ea2.ngrok.io/api';
+  final baseUrl = 'http://9c1dd7f4de37.ngrok.io/api';
 
   Future<User> getUser(int id) async {
     final response = await client.get(baseUrl + '/person/' + id.toString());
@@ -24,19 +24,18 @@ class ApiProvider {
     }
   }
 
-  Future<List<User>> getLike (int id) async {
+  Future<List<User>> getLike(int id) async {
     final response = await client.get(baseUrl + '/getlike/' + id.toString());
 
     print(response.body.toString());
 
-    Iterable l = json.decode(response.body); 
+    Iterable l = json.decode(response.body);
 
-    List<User> listuser = List<User>.from( l.map((e) => User.fromJson(e)));
+    List<User> listuser = List<User>.from(l.map((e) => User.fromJson(e)));
 
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       return listuser;
-    }
-    else {
+    } else {
       throw Exception('failed to load liked user');
     }
   }
@@ -68,88 +67,83 @@ class ApiProvider {
     }
   }
 
-  Future<List<User>> getliked(int id ) async {
+  Future<List<User>> getliked(int id) async {
     // final response = await client.get(baseUrl + '/person' );
 
-    final userrespone = await client.get(baseUrl + '/getlikedperson/' + id.toString());
-    print (baseUrl + '/getlikedperson/' + id.toString());
+    final userrespone =
+        await client.get(baseUrl + '/getlikedperson/' + id.toString());
+    print(baseUrl + '/getlikedperson/' + id.toString());
 
     Iterable l = json.decode(userrespone.body);
 
-    List<ID> list = List<ID>.from(l.map((e) => ID.fromJson(e))); 
+    List<ID> list = List<ID>.from(l.map((e) => ID.fromJson(e)));
 
     List<User> listuser = [];
 
     // final userresponse;
 
-    for (ID i in list)
-    {
+    for (ID i in list) {
       final userresponse = await client.get(baseUrl + '/person/' + i.id);
 
-      User u = User.fromJson(json.decode(userresponse.body)); 
+      User u = User.fromJson(json.decode(userresponse.body));
 
-      listuser.add(u) ; 
+      listuser.add(u);
     }
-    // print (map) ; 
+    // print (map) ;
 
-
-    if(userrespone.statusCode == 200) {
+    if (userrespone.statusCode == 200) {
       return listuser;
     } else {
-      throw Exception ('list empty');
+      throw Exception('list empty');
     }
   }
 
-  Future<List<User>> getSwipe(int id ) async {
-    final response = await client.get(baseUrl + '/person' );
+  Future<List<User>> getSwipe(int id) async {
+    final response = await client.get(baseUrl + '/person');
 
     final userrespone = await client.get(baseUrl + '/person/' + id.toString());
 
-    Iterable l = json.decode(response.body); 
+    Iterable l = json.decode(response.body);
 
-    List<User> listuser = List<User>.from( l.map((e) => User.fromJson(e)));
-    // print (listuser) ; 
+    List<User> listuser = List<User>.from(l.map((e) => User.fromJson(e)));
+    // print (listuser) ;
 
     User u = User.fromJson(json.decode(userrespone.body));
-    
-    listuser.remove(u) ; 
 
-    print(listuser) ; 
-    if(response.statusCode == 200 && userrespone.statusCode == 200) {
+    listuser.remove(u);
+
+    print(listuser);
+    if (response.statusCode == 200 && userrespone.statusCode == 200) {
       return listuser;
     } else {
-      throw Exception ('list empty');
+      throw Exception('list empty');
     }
   }
 
-  Future<String> getID (String uid) async {
-    print (baseUrl + '/getinfo/'+ uid);
-    final response = await client.get(baseUrl + '/getinfo/'+ uid); 
+  Future<String> getID(String uid) async {
+    print(baseUrl + '/getinfo/' + uid);
+    final response = await client.get(baseUrl + '/getinfo/' + uid);
 
-    if(response.statusCode == 200) {
-      var map = jsonDecode(response.body) ;
-      if(map.length > 0 ) 
+    if (response.statusCode == 200) {
+      var map = jsonDecode(response.body);
+      if (map.length > 0)
         return map[0]['id'].toString();
-      else 
-        return (-1).toString(); 
-    }
-    else throw Exception('Failed');
+      else
+        return (-1).toString();
+    } else
+      throw Exception('Failed');
   }
 
   Future<User> postUser(User user) async {
-    final response = await client.post(
-      baseUrl + '/person/', 
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      }, 
-      body: user.toString()
-    ); 
+    final response = await client.post(baseUrl + '/person/',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: user.toString());
 
-    if(response.statusCode == 201) {
+    if (response.statusCode == 201) {
       return User.fromJson(json.decode(response.body));
-    }
-    else 
-    {
+    } else {
       throw Exception('Failed to create');
     }
   }
