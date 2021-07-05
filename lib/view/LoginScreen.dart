@@ -15,6 +15,7 @@ import 'package:honeyaa_clientside/view/MainScreen.dart';
 import 'package:honeyaa_clientside/view/RegisterScreen.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/RegisterSubScreen.dart';
 import 'package:lottie/lottie.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Global.dart';
@@ -43,20 +44,15 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  // @override
-  // void initState() {
-  //   //  set time to load the new page
-  //   Future.delayed(Duration(seconds: 5), () {
-  //     //Navigator.pushNamed(context, '/mainhub');
-  //   });
-  //   super.initState();
-  // }
   @override
   void initState() {
+    //  set time to load the new page
+    Future.delayed(Duration(seconds: 5), () {
+      //Navigator.pushNamed(context, '/mainhub');
+    });
     super.initState();
-    final pushNotification = Get.i.find<PushNotification>();
-    pushNotification.initialize("486d8ce2-ec8c-4a58-9408-2b9e05c191c0");
   }
+
 
   setUIDPref(String uid) async {
     await SharedPreferenceHelper().saveUserUID(uid);
