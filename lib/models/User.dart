@@ -10,10 +10,11 @@ class User extends Equatable {
   String name;
   String oriented;
   String personpicture;
+  List<String> matchedPerson;
   List<String> swipeperson;
   List<String> interested;
   
-  User ({ this.url, this.uid,  this.name , this.oriented,this.personpicture, this.interested});
+  User ({ this.url, this.uid,  this.name , this.oriented,this.matchedPerson,this.personpicture, this.interested});
 
   User.fromUserRegistration( UserRegistration usertype)
   {
@@ -31,11 +32,13 @@ class User extends Equatable {
     this.name = json['_name']; 
     this.oriented = json['oriented']; 
     this.personpicture = json ['personpicture'];
+    this.matchedPerson = List<String>.from(json['matchedPerson']);
     this.swipeperson = new List<String>.from(json['swipePerson']);
     this.interested = new List<String>.from(json['interested']);
   }
 
   String toString() {
+    print (matchedPerson) ; 
     String result = '';
 
     String interest = '[@param]';
@@ -45,13 +48,25 @@ class User extends Equatable {
       param += '"' + interested[i] + '"' + ',';
     }
 
-    param = param.substring(0, param.length-1); 
+    if(param != '')
+      param = param.substring(0, param.length-1); 
 
     String newinterest = interest.replaceAll("@param", param);
 
-    print(interest);
+    String matched = '[@param]';
+    param = ''; 
 
-    result = '{ "url": "$url", "uid": "$uid", "_name": "$name","personpicture": "$personpicture", "oriented": "http://127.0.0.1:8000/api/oriented/10/", "interested": $newinterest}';
+    for(int i = 0 ; i < this.matchedPerson.length; i++)
+    {
+      param += '"' + this.matchedPerson[i] + '"' + ',';
+    }
+
+    if(param != '') 
+      param = param.substring(0, param.length-1);
+
+    String newmatch = matched.replaceAll("@param",param) ; 
+
+    result = '{ "url": "$url", "uid": "$uid", "_name": "$name","personpicture": "$personpicture","matchedPerson" : $newmatch , "oriented": "http://127.0.0.1:8000/api/oriented/10/", "interested": $newinterest}';
 
     print (result);
 

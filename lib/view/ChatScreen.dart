@@ -14,17 +14,15 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   String chatRoomId, messageId = "";
   Stream messageStream;
-  String myName, myProfilePic, myUserName, myEmail;
+  String myName, myProfilePic, myUID, myEmail;
   TextEditingController messageTextEdittingController = TextEditingController();
 
   getMyInfoFromSharedPreference() async {
-    myName = await SharedPreferenceHelper().getDisplayName();
+    // myName = await SharedPreferenceHelper().getDisplayName();
     myProfilePic = await SharedPreferenceHelper().getUserProfileUrl();
-    //myUserName = await SharedPreferenceHelper().getUserName();
-    myUserName = "7O9s2HZgDie8poYWFw0HuLtI4MC2";
-    myEmail = await SharedPreferenceHelper().getUserEmail();
+    myUID = await SharedPreferenceHelper().getUserUID();
 
-    chatRoomId = getChatRoomIdByUsernames(widget.chatWithUsername, myUserName);
+    chatRoomId = getChatRoomIdByUsernames(widget.chatWithUsername, myUID);
   }
 
   getChatRoomIdByUsernames(String a, String b) {
@@ -43,7 +41,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
       Map<String, dynamic> messageInfoMap = {
         "message": message,
-        "sendBy": myUserName,
+        "sendBy": myUID,
         "ts": lastMessageTs,
         "imgUrl": myProfilePic
       };
@@ -59,7 +57,7 @@ class _ChatScreenState extends State<ChatScreen> {
         Map<String, dynamic> lastMessageInfoMap = {
           "lastMessage": message,
           "lastMessageSendTs": lastMessageTs,
-          "lastMessageSendBy": myUserName
+          "lastMessageSendBy": myUID
         };
 
         DatabaseMethods().updateLastMessageSend(chatRoomId, lastMessageInfoMap);
@@ -115,7 +113,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 itemBuilder: (context, index) {
                   DocumentSnapshot ds = snapshot.data.docs[index];
                   return chatMessageTile(
-                      ds["message"], myUserName == ds["sendBy"]);
+                      ds["message"], myUID == ds["sendBy"]);
                 })
             : Center(child: CircularProgressIndicator());
       },
@@ -142,7 +140,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(myUserName, style: TextStyle(color: Colors.white),),
+        title: Text(widget.name, style: TextStyle(color: Colors.white),),
         iconTheme:IconThemeData(color: Colors.white),
       ),
       body: Container(
