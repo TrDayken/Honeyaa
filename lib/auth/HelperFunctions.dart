@@ -3,16 +3,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPreferenceHelper {
   static String userIdKey = "USERKEY";
   static String userNameKey = "USERNAMEKEY";
+  static String userAgeKey = "USERAGEKEY";
   static String displayNameKey = "USERDISPLAYNAMEKEY";
   static String userEmailKey = "USEREMAILKEY";
   static String userProfilePicKey = "USERPROFILEPICKEY";
 
-  static String userUID = "USERUID"; 
+  static String userUID = "USERUID";
 
   //save data
   Future<bool> saveUserName(String getUserName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString(userNameKey, getUserName);
+  }
+
+  Future<bool> saveUserAge(int getUserAge) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setInt(userAgeKey, getUserAge);
   }
 
   Future<bool> saveUserEmail(String getUseremail) async {
@@ -44,6 +50,11 @@ class SharedPreferenceHelper {
   Future<String> getUserName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(userNameKey);
+  }
+
+  Future<int> getUserAge() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(userAgeKey);
   }
 
   Future<String> getUserEmail() async {

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:honeyaa_clientside/auth/HelperFunctions.dart';
 import 'package:honeyaa_clientside/auth/Methods.dart';
 import 'package:honeyaa_clientside/bloc/pictureBloc.dart';
+import 'package:honeyaa_clientside/models/User.dart';
+import 'package:honeyaa_clientside/networking/ApiProvider.dart';
 import 'package:honeyaa_clientside/view/register_sub_screen/RegisterSubScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +13,26 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  User user = new User();
+
+  void getProfile() async {
+    String id = await SharedPreferenceHelper().getUserId();
+
+    User u = await ApiProvider().getUser(int.parse(id));
+    
+    print(u);
+
+    this.user = u;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getProfile();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -104,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 15,
             ),
             Text(
-              "Duy, 25",
+              user.name==null ? "" : "${user.name}",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
             ),
             SizedBox(

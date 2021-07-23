@@ -53,9 +53,16 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
   }
 
-
   setUIDPref(String uid) async {
     await SharedPreferenceHelper().saveUserUID(uid);
+  }
+
+  setNamePref(String name) async {
+    await SharedPreferenceHelper().saveUserName(name);
+  }
+
+  setAgePref(int age) async {
+    await SharedPreferenceHelper().saveUserAge(age);
   }
 
   setUserid(String uid) async {

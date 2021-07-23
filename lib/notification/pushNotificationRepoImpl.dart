@@ -8,7 +8,7 @@ class PushNotificationRepoImpl implements PushNotification {
   final OneSignal _oneSignal;
 
   PushNotificationRepoImpl(this._oneSignal);
-  final _controller = StreamController.broadcast();
+  final _controller = StreamController<OSNotification>.broadcast();
   Stream<OSNotification> get onNotification => _controller.stream;
 
 
