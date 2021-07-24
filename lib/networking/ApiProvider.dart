@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:flutter/rendering.dart';
 import 'package:honeyaa_clientside/bloc/userBloc.dart';
+import 'package:honeyaa_clientside/models/OneSignal.dart';
 import 'package:honeyaa_clientside/models/Picture.dart';
 import 'package:honeyaa_clientside/models/id.dart';
 import 'package:http/http.dart' show Client;
@@ -10,7 +12,7 @@ class ApiProvider {
   Client client = Client();
 
   // final baseUrl = 'http://127.0.0.1:8000/api';
-  final baseUrl = 'http://c6febb6ec8c5.ngrok.io/api';
+  final baseUrl = 'http://8a36628b7dc4.ngrok.io/api';
 
   Future<User> getUser(int id) async {
     final response = await client.get(baseUrl + '/person/' + id.toString());
@@ -120,6 +122,23 @@ class ApiProvider {
     }
   }
 
+  Future<List<OneSignalModel>> getOneSignal(String uid) async {
+    final response = await client.get(baseUrl + '/getonesignal/' + uid);
+
+    Iterable l = json.decode(response.body);
+
+    List<OneSignalModel> listOnesignal = List<OneSignalModel>.from( l.map((e) => OneSignalModel.fromJson(e)));
+
+    print(listOnesignal);
+
+    if(response.statusCode == 200) {
+      return listOnesignal;
+    }
+    else {
+      throw Exception ('list empty');
+    }
+  }
+
   Future<String> getID(String uid) async {
     print(baseUrl + '/getinfo/' + uid);
     final response = await client.get(baseUrl + '/getinfo/' + uid);
@@ -145,6 +164,20 @@ class ApiProvider {
       return User.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to create');
+    }
+  }
+
+  Future<OneSignalModel> postOneSignalModel(OneSignalModel model) async {
+    final response = await client.post(baseUrl + '/onesignal/',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: model.toString());
+
+    if (response.statusCode == 201) {
+      return OneSignalModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('failed to create');
     }
   }
 }

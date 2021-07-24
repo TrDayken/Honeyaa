@@ -8,6 +8,7 @@ import 'package:honeyaa_clientside/auth/HelperFunctions.dart';
 import 'package:honeyaa_clientside/auth/Methods.dart';
 import 'package:honeyaa_clientside/bloc/idBloc.dart';
 import 'package:honeyaa_clientside/component/ProgressDialog.dart';
+import 'package:honeyaa_clientside/models/OneSignal.dart';
 import 'package:honeyaa_clientside/networking/ApiProvider.dart';
 import 'package:honeyaa_clientside/notification/pushNotificationRepo.dart';
 import 'package:honeyaa_clientside/view/MainHub.dart';
@@ -63,6 +64,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   setAgePref(int age) async {
     await SharedPreferenceHelper().saveUserAge(age);
+  }
+
+  setOneSignalUID() async {
+    var id = await SharedPreferenceHelper().getUserId();
+    var userId = await OneSignal.shared.getDeviceState() ;
+
+    OneSignalModel model = new OneSignalModel();
+
+    model.oneSignalUID = userId.userId;
+    model.owner = ApiProvider().baseUrl + "/person/" + id + "/";
+
+    print(model.owner) ; 
+
+    await ApiProvider().postOneSignalModel(model) ; 
   }
 
   setUserid(String uid) async {
@@ -191,6 +206,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               print(user.uid);
                               setUIDPref(user.uid);
                               setUserid(user.uid);
+
+                              setOneSignalUID();
                               if (user != null) {
                                 setState(() {
                                   //isLoading = true;
