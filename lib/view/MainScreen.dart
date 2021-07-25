@@ -3,6 +3,7 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:honeyaa_clientside/auth/HelperFunctions.dart';
 import 'package:honeyaa_clientside/bloc/pictureBloc.dart';
+import 'package:honeyaa_clientside/bloc/userBloc.dart';
 import 'package:honeyaa_clientside/bloc/userListBloc.dart';
 import 'package:honeyaa_clientside/models/Picture.dart';
 import 'package:honeyaa_clientside/models/User.dart';
@@ -50,21 +51,44 @@ class _MyHomePageState extends State<MyHomePage> {
     listuserBloc.getListUser(int.parse(id));
   }
 
-  createNotification(String uid) async {
-    var userId = await OneSignal.shared.getDeviceState() ; 
-    userId.userId; 
+  createNotification(String uid, String personid) async {
+    String id = await SharedPreferenceHelper().getUserId();
+    
+    var user = await ApiProvider().getUser(int.parse(id));
 
+    user.matchedPerson.add(personid);
+
+    await ApiProvider().putUser(user, id);
+
+    var userId = await OneSignal.shared.getDeviceState() ; 
 
     var listids = await ApiProvider().getOneSignal(uid) ; 
-    print ("[INFO]" + listids.toString()) ; 
-    print ("[INFO]" + listids.map((e) => e.oneSignalUID).toString());
+
+    List<String> list = listids.map((e) => e.oneSignalUID).toList();
+    print("[INFO]" + list.toString());
+
+    list.add("${userId.userId}"); 
+    print("[INFO]" + list.toString());
+
+    var notification = OSCreateNotification(
+      // playerIds: ["d0591ff0-3291-4768-b12c-154cd0bc94d9"],
+      playerIds: list,
+      content: "Check the app to find out who it was !!!",
+      heading: "Someone has Matched with you",
+    );
+    var response = await OneSignal.shared.postNotification(notification);
+    print(response.values);
+  }
+  createLikeNotification(String uid) async {
+    var listids = await ApiProvider().getOneSignal(uid);
 
     var notification = OSCreateNotification(
       // playerIds: ["d0591ff0-3291-4768-b12c-154cd0bc94d9"],
       playerIds: listids.map((e) => e.oneSignalUID).toList(),
-      content: "this is a test from OneSignal's Flutter SDK",
-      heading: "Test Notification",
+      content: "Keep right swip'in ",
+      heading: "Someone Liked you",
     );
+
     var response = await OneSignal.shared.postNotification(notification);
     print(response.values);
   }
@@ -141,8 +165,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   for (var x in like) {
                     if (upondata[temp] == x) {
-                      createNotification(upondata[temp].uid);
+                      createNotification(upondata[temp].uid, upondata[temp].url);
                       print("match !!!!!!!!!!!!!!!!");
+                      return;
+                    }
+                    else 
+                    {
+                      createLikeNotification(upondata[temp].uid);
+                      print ("Like !");
                       return;
                     }
                   }

@@ -12,9 +12,10 @@ class ApiProvider {
   Client client = Client();
 
   // final baseUrl = 'http://127.0.0.1:8000/api';
-  final baseUrl = 'http://8a36628b7dc4.ngrok.io/api';
+  final baseUrl = 'http://fed3dcde0fd3.ngrok.io/api';
 
   Future<User> getUser(int id) async {
+
     final response = await client.get(baseUrl + '/person/' + id.toString());
 
     print(response.body.toString());
@@ -165,6 +166,20 @@ class ApiProvider {
     } else {
       throw Exception('Failed to create');
     }
+  }
+
+  Future<User> putUser(User user, String id) async {
+    print('[INFO]' + baseUrl + '/person/' + id );
+    
+    var x = user.toString();
+
+    final response = await client.put(baseUrl + '/person/' + id +'/',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: user.toString());
+
+    return User.fromJson(json.decode(response.body));
   }
 
   Future<OneSignalModel> postOneSignalModel(OneSignalModel model) async {

@@ -198,7 +198,8 @@ class _RegisterSubScreenState extends State<RegisterSubScreen> {
                           color: secondaryColor,
                           onPressed: isLoading == false
                               ? () => {
-                                    createUser(_userRegistration) ?? NullThrownError()
+                                    createUser(_userRegistration),
+                                    Navigator.pushNamed(context, "/mainhub")
                                   }
                               : null)
                       : MaterialButton(
